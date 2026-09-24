@@ -1,0 +1,238 @@
+@tailwind components;
+
+@layer components {
+  :root {
+    --logo-gap: 12px;
+  }
+
+  @keyframes logosScroll {
+    0%, 18% { transform: translateX(0); }
+    30%, 48% { transform: translateX(calc(-50% - var(--logo-gap))); }
+    52%, 72% { transform: translateX(calc(-50% - var(--logo-gap))); }
+    100% { transform: translateX(0); }
+  }
+
+  @keyframes bounce {
+    0%, 30% { transform: translateY(0); }
+    50% { transform: translateY(60px); }
+    100% { transform: translateY(0); }
+  }
+
+  @keyframes steppedScroll {
+    0%, 12% { transform: translateX(0); }
+    18%, 22% { transform: translateX(-15%); }
+    28%, 40% { transform: translateX(-15%); }
+    46%, 50% { transform: translateX(-32%); }
+    56%, 68% { transform: translateX(-32%); }
+    74%, 78% { transform: translateX(-49%); }
+    84%, 96% { transform: translateX(-49%); }
+    100% { transform: translateX(0); }
+  }
+
+  .carousel-viewport {
+    overflow: hidden;
+    width: 540px;
+    max-width: 100%;
+  }
+
+  .client-marquee {
+    display: flex;
+    width: 200%;
+    gap: var(--logo-gap);
+    animation: logosScroll 9.9s ease-in-out infinite;
+    will-change: transform;
+  }
+
+  .client-marquee > div {
+    flex: 0 0 50%;
+    width: 50%;
+  }
+
+  .logo-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    width: 100%;
+  }
+
+  .section-two-arrow {
+    animation: bounce 1.8s ease-in-out infinite;
+  }
+
+  .video-carousel-track {
+    display: flex;
+    gap: 1.5rem;
+    width: 100%;
+    transition: transform 0.5s ease;
+    will-change: transform;
+    padding-right: 0;
+    overflow: visible;
+    padding-left: 12vw;
+  }
+
+  .video-card {
+    flex: 0 0 clamp(330px, 42vw, 650px);
+    min-width: 0;
+  }
+
+  .video-card-video {
+    border-radius: 1rem;
+    overflow: hidden;
+    background: #dfe4e6;
+    aspect-ratio: 16 / 9;
+    height: auto;
+  }
+
+  .video-card-video video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background: #dfe4e6;
+  }
+
+  .section-three-cta {
+    transition: transform 0.25s ease;
+    background: transparent;
+    border: none;
+    padding: 0;
+  }
+
+  .section-three-cta:hover {
+    transform: translateY(-3px);
+  }
+
+  .section-three-cta-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 7.25rem;
+    height: 7.25rem;
+    border-radius: 9999px;
+    background: #179CBD;
+    box-shadow: 0 8px 20px rgba(23, 156, 189, 0.28);
+    color: #ffffff;
+    text-align: center;
+    font-weight: 800;
+    line-height: 0.9;
+    letter-spacing: -0.06em;
+    transition: background-color 0.25s ease, transform 0.25s ease;
+  }
+
+  .section-three-cta-pill span {
+    display: block;
+    font-size: clamp(1.5rem, 2vw, 2.2rem);
+  }
+
+  .section-three-cta:hover .section-three-cta-pill {
+    background: #FCBE17;
+    transform: translateY(-3px);
+  }
+
+  .photography-cta {
+    right: 10%;
+  }
+
+  .photography-cta-pill {
+    width: 6.875rem;
+    height: 6.875rem;
+    box-shadow: 0 6px 14px rgba(23, 156, 189, 0.25);
+  }
+
+  .photography-cta-pill span {
+    font-size: 1.375rem;
+  }
+
+  .section-three-nav {
+    --arrow-bg: #FCBE17;
+    transition: transform 0.25s ease, background-color 0.25s ease;
+    background: transparent;
+    border: none;
+    padding: 0;
+  }
+
+  .section-three-nav:hover {
+    transform: translateY(-1px);
+    --arrow-bg: #179CBD;
+  }
+
+  .section-three-nav svg {
+    display: block;
+    width: 1.55rem;
+    height: 1.55rem;
+    transition: transform 0.25s ease;
+  }
+
+  .section-three-nav .arrow-bg {
+    fill: var(--arrow-bg);
+    transition: fill 0.25s ease;
+  }
+
+  .review-card-wrapper {
+    min-width: 280px;
+    max-width: 340px;
+    width: min(100%, 340px);
+  }
+
+  .review-carousel-track {
+    width: max-content;
+    animation: steppedScroll 18s ease-in-out infinite;
+    will-change: transform;
+  }
+
+  @media (min-width: 768px) {
+    .section-three-cta-pill {
+      width: 8.6rem;
+      height: 8.6rem;
+    }
+
+    .section-three-nav svg {
+      width: 1.85rem;
+      height: 1.85rem;
+    }
+
+    .video-card {
+      flex-basis: clamp(360px, 40vw, 610px);
+    }
+
+    .photography-cta-pill {
+      width: 8.25rem;
+      height: 8.25rem;
+    }
+
+    .photography-cta-pill span {
+      font-size: 1.7rem;
+    }
+  }
+
+  @media (min-width: 640px) {
+    .photography-cta {
+      right: 12%;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .photography-cta {
+      right: 18%;
+    }
+
+    .video-card {
+      flex-basis: clamp(420px, 34vw, 620px);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .client-marquee {
+      animation: none;
+      transform: none;
+    }
+
+    .section-two-arrow {
+      animation: none;
+    }
+
+    .video-carousel-track {
+      transition: none;
+    }
+  }
+}

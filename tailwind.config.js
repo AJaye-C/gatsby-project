@@ -3,17 +3,35 @@ module.exports = {
   content: [
     "./src/pages/**/*.{js,jsx,ts,tsx}",
     "./src/components/**/*.{js,jsx,ts,tsx}",
+    "./src/hooks/**/*.{js,jsx,ts,tsx}",
+    "./src/data/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
     extend: {
       colors: {
-        pocket: {
-          yellow: "#FCBE17",
+        brand: {
+          yellow: "#F5B800",
+          cyan: "#00A8CC",
           teal: "#179CBD",
-          cyan: "#32D6FF",
           slate: "#526E87",
-          page: "#F2F2F2",
-          heart: "#FF1E00",
+          bg: "#efefee",
+          red: "#ff3b4d",
+          line: "#dfe4e6",
+          panel: "#e2e4e6",
+          soft: "#e5e5e5",
+          "text-dark": "#111827",
+          "text-muted": "#4a5568",
+          "body-muted": "#55606a",
+          "subtle-muted": "#676d75",
+        },
+        social: {
+          whatsapp: "#25D366",
+        },
+        google: {
+          blue: "#4285F4",
+          red: "#EA4335",
+          yellow: "#FBBC05",
+          green: "#34A853",
         },
       },
       fontFamily: {

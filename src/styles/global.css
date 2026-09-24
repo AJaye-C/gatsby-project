@@ -10,7 +10,7 @@
   }
 
   body {
-    @apply overflow-x-hidden bg-[#efefee] font-sans text-[#111111] antialiased;
+    @apply overflow-x-hidden bg-brand-bg font-sans text-[#111111] antialiased;
     margin: 0;
   }
 
