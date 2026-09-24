@@ -8,22 +8,22 @@ const Hero = () => (
         <img src="/figma/images/logo.png" alt="Pocket Creatives" className="h-[76px] w-[145px] object-contain sm:h-[94px] sm:w-[175px] lg:h-[115px] lg:w-[204px]" />
 
         <div className="hidden items-end gap-3 md:flex">
-          <img
+            <img
             src="/figma/images/hero-people-2.png"
             alt="Female photographer"
-            className="h-[70px] w-[120px] rounded-[16px] object-cover lg:h-[90px] lg:w-[150px]"
-          />
-          <img
+            className="h-[90px] w-[150px] rounded-[16px] object-cover lg:h-[110px] lg:w-[180px]"
+            />
+            <img
             src="/figma/images/hero-people-1.png"
             alt="Male videographer"
-            className="h-[70px] w-[120px] rounded-[16px] object-cover object-right lg:h-[90px] lg:w-[150px]"
-          />
+            className="h-[90px] w-[150px] rounded-[16px] object-cover object-right lg:h-[110px] lg:w-[180px]"
+            />
         </div>
       </div>
 
       <hr className="mt-0 border-t border-brand-line" />
 
-      <h1 className="mt-8 max-w-[1040px] text-left text-[2.2rem] font-medium leading-[0.96] tracking-[-0.07em] text-brand-slate sm:text-[2.8rem] md:text-[3.2rem] lg:text-[3.7rem] 2xl:text-[4rem]">
+      <h1 className="mt-8 max-w-[1200px] text-left text-[2.2rem] font-medium leading-[0.96] tracking-[-0.07em] text-brand-slate sm:text-[2.8rem] md:text-[3.2rem] lg:text-[3.7rem] 2xl:text-[2.5rem]">
         We’re a <span className="font-black text-brand-yellow">fast</span> &amp; <span className="font-black text-brand-yellow">friendly</span>{" "}
         <span className="font-black text-brand-cyan">Video Production</span> and <span className="font-black text-brand-cyan">Photography</span> company
         <br className="hidden lg:block" />
@@ -44,8 +44,8 @@ const Hero = () => (
         </div>
       </div>
 
-      <div className="mt-10 mx-auto grid w-full min-w-0 items-center justify-center gap-8 px-0 md:gap-12 xl:grid-cols-[1fr_1fr]">
-        <div className="mx-auto w-full max-w-[480px] min-w-0 px-2 pt-2 sm:px-0 xl:mx-0 xl:justify-self-center xl:pr-4">
+      <div className="mt-10 mx-auto grid items-center justify-center gap-8 md:gap-12 xl:grid-cols-[1fr_1fr]">
+        <div className="mx-auto max-w-[480px] pt-2 pr-0 xl:mx-0 xl:justify-self-center xl:pr-4">
           <p className="text-[clamp(1.45rem,2vw,2.6rem)] font-medium leading-[1.02] tracking-[-0.07em] text-brand-slate">
             As you see, we’ve <span className="font-black text-brand-yellow">partnered</span>
             <br />
