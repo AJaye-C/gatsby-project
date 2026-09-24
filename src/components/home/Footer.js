@@ -8,7 +8,7 @@ const Footer = () => (
         We&apos;d love to chat about how we can help you with your next project, get in touch!
       </h2>
 
-      <div className="relative mb-16 grid grid-cols-1 gap-8 md:grid-cols-[1.5fr_0.8fr] md:items-end">
+      <div className="mb-16 grid grid-cols-1 gap-8 md:grid-cols-[1.5fr_0.8fr] md:items-end">
         <div className="space-y-8">
           <div className="grid gap-10 sm:grid-cols-2">
             <div className="space-y-4">
@@ -49,11 +49,17 @@ const Footer = () => (
                 Subscribe
               </button>
             </div>
+
+            <div className="mt-5 flex justify-start md:hidden">
+              <div className="inline-flex items-center rounded-2xl bg-white px-6 py-3 shadow-md">
+                <img src="/figma/images/logo.png" alt="Pocket Creatives" className="h-[42px] w-[110px] object-contain sm:h-[48px] sm:w-[130px]" />
+              </div>
+            </div>
           </div>
         </div>
 
-        <div className="pointer-events-none absolute inset-y-0 left-1/2 right-1/2 -mx-[50vw] flex w-screen items-end justify-end">
-          <div className="pointer-events-auto mr-4 flex items-center rounded-2xl bg-white px-6 py-3 shadow-md sm:mr-6 lg:mr-8">
+        <div className="hidden justify-end md:flex">
+          <div className="pointer-events-auto inline-flex items-center rounded-2xl bg-white px-6 py-3 shadow-md">
             <img src="/figma/images/logo.png" alt="Pocket Creatives" className="h-[42px] w-[110px] object-contain sm:h-[48px] sm:w-[130px]" />
           </div>
         </div>

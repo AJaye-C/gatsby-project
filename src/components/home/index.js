@@ -1,6 +1,7 @@
 export { default as Header } from "./Header";
 export { default as Hero } from "./Hero";
 export { default as ClientLogos } from "./ClientLogos";
+export { default as VideoCTABanner } from "./VideoCTABanner";
 export { default as VideoScroller } from "./VideoScroller";
 export { default as QualitySection } from "./QualitySection";
 export { default as PhotographySection } from "./PhotographySection";

@@ -3,6 +3,7 @@ import Layout from "../components/Layout";
 import {
   Header,
   Hero,
+  VideoCTABanner,
   QualitySection,
   VideoScroller,
   PhotographySection,
@@ -22,8 +23,11 @@ const IndexPage = () => {
       <main className="min-h-screen bg-brand-bg text-brand-slate">
         <Header />
         <Hero />
+        <VideoCTABanner />
+        <div id="video-production">
+          <VideoScroller />
+        </div>
         <QualitySection />
-        <VideoScroller />
         <PhotographySection activeCategory={activeCategory} setActiveCategory={setActiveCategory} />
         <ServicesChecklist />
         <TeamSection />

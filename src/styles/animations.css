@@ -12,11 +12,16 @@
     100% { transform: translateX(0); }
   }
 
-  @keyframes bounce {
-    0%, 30% { transform: translateY(0); }
-    50% { transform: translateY(60px); }
-    100% { transform: translateY(0); }
-  }
+    @keyframes bounce {
+    0%, 45% { transform: translateY(0); }
+    60% { transform: translateY(60px); }
+    75%, 100% { transform: translateY(0); }
+    }
+
+    .section-two-arrow {
+    animation: bounce 4s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+    transform-origin: center;
+    }
 
   @keyframes steppedScroll {
     0%, 12% { transform: translateX(0); }
@@ -31,8 +36,9 @@
 
   .carousel-viewport {
     overflow: hidden;
-    width: 540px;
-    max-width: 100%;
+    width: 100%;
+    max-width: 540px;
+    min-width: 0;
   }
 
   .client-marquee {
@@ -55,10 +61,6 @@
     width: 100%;
   }
 
-  .section-two-arrow {
-    animation: bounce 1.8s ease-in-out infinite;
-  }
-
   .video-carousel-track {
     display: flex;
     gap: 1.5rem;
@@ -71,7 +73,7 @@
   }
 
   .video-card {
-    flex: 0 0 clamp(330px, 42vw, 650px);
+    flex: 0 0 100%;
     min-width: 0;
   }
 
@@ -169,14 +171,14 @@
   }
 
   .review-card-wrapper {
-    min-width: 280px;
-    max-width: 340px;
-    width: min(100%, 340px);
+    min-width: 0;
+    max-width: none;
+    width: 100%;
   }
 
   .review-carousel-track {
-    width: max-content;
-    animation: steppedScroll 18s ease-in-out infinite;
+    width: 100%;
+    animation: none;
     will-change: transform;
   }
 
@@ -192,7 +194,7 @@
     }
 
     .video-card {
-      flex-basis: clamp(360px, 40vw, 610px);
+      flex-basis: 48%;
     }
 
     .photography-cta-pill {
@@ -202,6 +204,17 @@
 
     .photography-cta-pill span {
       font-size: 1.7rem;
+    }
+
+    .review-card-wrapper {
+      min-width: 280px;
+      max-width: 340px;
+      width: min(100%, 340px);
+    }
+
+    .review-carousel-track {
+      width: max-content;
+      animation: steppedScroll 18s ease-in-out infinite;
     }
   }
 
@@ -217,7 +230,13 @@
     }
 
     .video-card {
-      flex-basis: clamp(420px, 34vw, 620px);
+      flex-basis: 48%;
+    }
+  }
+
+  @media (min-width: 1440px) {
+    .video-card {
+      flex-basis: calc(50% - 0.75rem);
     }
   }
 

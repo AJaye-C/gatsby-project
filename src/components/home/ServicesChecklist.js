@@ -14,7 +14,7 @@ const ServicesChecklist = () => {
           </h2>
         </div>
 
-        <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-3 lg:mt-16 lg:gap-12">
+        <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 lg:mt-16 lg:gap-12">
           <article>
             <h3 className="mb-3 text-xl font-bold text-brand-text-dark">Proactive</h3>
             <p className="text-sm leading-relaxed text-brand-text-dark/90 sm:text-base">
@@ -29,11 +29,11 @@ const ServicesChecklist = () => {
             </p>
           </article>
 
-          <article className="relative">
+          <article className="relative flex h-full flex-col">
             <button
               type="button"
               aria-label="Say hello"
-              className="group absolute -right-3 bottom-[150%] z-20 flex -translate-y-1/2 items-center justify-center sm:-right-4 lg:-right-6"
+              className="group absolute -right-3 bottom-[150%] z-20 hidden -translate-y-1/2 items-center justify-center md:flex sm:-right-4 lg:-right-6"
               onMouseEnter={() => setIsSayHelloHovered(true)}
               onMouseLeave={() => setIsSayHelloHovered(false)}
             >
@@ -43,10 +43,27 @@ const ServicesChecklist = () => {
                 className="h-24 w-24 object-contain drop-shadow-[0_8px_20px_rgba(24,32,52,0.18)] sm:h-28 sm:w-28 lg:h-32 lg:w-32"
               />
             </button>
+
             <h3 className="mb-3 text-xl font-bold text-brand-text-dark">Valuable</h3>
             <p className="text-sm leading-relaxed text-brand-text-dark/90 sm:text-base">
               Lorem ipsum dolor sit amet consectetur. Varius tempor id nulla aliquet gravida. Quis at auctor quis lectus velit id parturient bibendum. Amet a erat faucibus enim orci. Praesent magna facilisi erat eget dictumst nulla nunc. Scelerisque cras viverra ipsum at accumsan a. Sed sollicitudin lacinia amet arcu volutpat. Id.
             </p>
+
+            <div className="mt-6 flex justify-end md:hidden">
+              <button
+                type="button"
+                aria-label="Say hello"
+                className="group flex items-center justify-center"
+                onMouseEnter={() => setIsSayHelloHovered(true)}
+                onMouseLeave={() => setIsSayHelloHovered(false)}
+              >
+                <img
+                  src={isSayHelloHovered ? "/figma/icons/say-hello-hvr.svg" : "/figma/icons/say-hello.svg"}
+                  alt="Say hello"
+                  className="h-24 w-24 object-contain drop-shadow-[0_8px_20px_rgba(24,32,52,0.18)]"
+                />
+              </button>
+            </div>
           </article>
         </div>
       </div>
