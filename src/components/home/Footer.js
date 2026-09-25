@@ -3,7 +3,7 @@ import { footerQuickLinks, footerSocials } from "../../data/footer";
 
 const Footer = () => (
   <footer className="w-full bg-brand-teal pt-16 pb-8 text-white sm:pt-20 lg:pt-24">
-    <div className="mx-auto max-w-[1280px] px-6 sm:px-10 lg:px-12">
+    <div className="mx-auto max-w-layout-shell px-6 sm:px-10 lg:px-12">
       <h2 className="mb-12 max-w-4xl text-3xl font-medium leading-[1.05] tracking-tight text-white sm:mb-16 sm:text-5xl lg:text-6xl">
         We&apos;d love to chat about how we can help you with your next project, get in touch!
       </h2>
@@ -50,7 +50,7 @@ const Footer = () => (
               </button>
             </div>
 
-            <div className="mt-5 flex justify-start md:hidden">
+            <div className="footer-logo-mobile">
               <div className="inline-flex items-center rounded-2xl bg-white px-6 py-3 shadow-md">
                 <img src="/figma/images/logo.png" alt="Pocket Creatives" className="h-[42px] w-[110px] object-contain sm:h-[48px] sm:w-[130px]" />
               </div>
@@ -58,7 +58,7 @@ const Footer = () => (
           </div>
         </div>
 
-        <div className="hidden justify-end md:flex">
+        <div className="footer-logo-desktop">
           <div className="pointer-events-auto inline-flex items-center rounded-2xl bg-white px-6 py-3 shadow-md">
             <img src="/figma/images/logo.png" alt="Pocket Creatives" className="h-[42px] w-[110px] object-contain sm:h-[48px] sm:w-[130px]" />
           </div>
@@ -70,7 +70,7 @@ const Footer = () => (
       <div className="border-t border-white/20" />
     </div>
 
-    <div className="mx-auto max-w-[1280px] px-6 sm:px-10 lg:px-12">
+    <div className="mx-auto max-w-layout-shell px-6 sm:px-10 lg:px-12">
       <div className="pt-8">
         <h3 className="mb-4 text-lg font-bold text-black">QuickLinks</h3>
         <nav className="flex flex-wrap gap-x-6 gap-y-2 text-xs font-semibold uppercase tracking-wider text-white sm:text-sm">

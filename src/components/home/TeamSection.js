@@ -7,7 +7,7 @@ const TeamSection = () => {
 
   return (
     <section className="w-full bg-brand-bg py-16 sm:py-20 lg:py-24">
-      <div className="mx-auto max-w-[1280px] px-6 sm:px-10 lg:px-12">
+      <div className="mx-auto max-w-layout-shell px-6 sm:px-10 lg:px-12">
         <div className="lg:hidden">
           <h2 className="mb-5 text-2xl font-black text-brand-slate sm:text-3xl">Meet the Team</h2>
 
@@ -169,7 +169,7 @@ const TeamSection = () => {
                     className="group flex h-16 w-16 transform items-center justify-center rounded-full bg-brand-teal text-center text-white shadow-md transition-all duration-200 hover:scale-105 hover:bg-brand-yellow sm:h-18 sm:w-18"
                     aria-label={`Message ${activeMember.firstName}`}
                     >
-                    <span className="text-[0.7rem] font-extrabold leading-[0.9] sm:text-[0.78rem]">
+                    <span className="text-team-badge font-extrabold sm:text-team-badge-sm">
                         Msg
                         <br />
                         {activeMember.firstName}

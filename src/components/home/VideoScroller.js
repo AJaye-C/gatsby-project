@@ -8,7 +8,7 @@ const VideoScroller = () => {
 
   return (
     <section className="w-full bg-brand-bg py-16 sm:py-20 lg:py-24">
-      <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-layout-shell px-4 sm:px-6 lg:px-8">
         <div className="mb-10 flex items-end justify-between gap-4">
           <div className="flex items-center gap-3">
             <img src="/figma/icons/icon-play.svg" alt="Play icon" className="h-8 w-8 md:h-10 md:w-10" />
@@ -77,7 +77,7 @@ const VideoScroller = () => {
         </div>
 
         <div className="mt-4 flex flex-col items-start gap-3">
-          <p className="text-[0.78rem] font-medium italic tracking-[-0.03em] text-brand-text-muted md:text-[0.88rem]">
+          <p className="text-micro-note font-medium italic text-brand-text-muted md:text-micro-note-lg">
             *Drag to play the next Video, Click to toggle sound
           </p>
 

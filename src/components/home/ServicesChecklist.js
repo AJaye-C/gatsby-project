@@ -5,9 +5,9 @@ const ServicesChecklist = () => {
 
   return (
     <section className="relative w-full bg-brand-yellow py-16 text-brand-text-dark sm:py-20 lg:py-24" aria-labelledby="section-six-title">
-      <div className="mx-auto max-w-[1280px] px-6 sm:px-10 lg:px-12">
+      <div className="mx-auto max-w-layout-shell px-6 sm:px-10 lg:px-12">
         <div className="max-w-[760px] pt-1 sm:pt-2 lg:pt-4">
-          <h2 id="section-six-title" className="text-[clamp(2.5rem,5vw,5.2rem)] font-black leading-[0.95] tracking-[-0.06em] text-white">
+          <h2 id="section-six-title" className="text-display-compact font-black text-white">
             <span className="block">Services - <span className="text-brand-teal">Check <span aria-hidden="true">✓</span></span></span>
             <span className="block">Quality - <span className="text-brand-teal">Check <span aria-hidden="true">✓</span></span></span>
             <span className="block">People - <span className="text-brand-teal">Check <span aria-hidden="true">✓</span></span></span>
@@ -33,7 +33,7 @@ const ServicesChecklist = () => {
             <button
               type="button"
               aria-label="Say hello"
-              className="group absolute -right-3 bottom-[150%] z-20 hidden -translate-y-1/2 items-center justify-center md:flex sm:-right-4 lg:-right-6"
+              className="say-hello-button group sm:-right-4 lg:-right-6"
               onMouseEnter={() => setIsSayHelloHovered(true)}
               onMouseLeave={() => setIsSayHelloHovered(false)}
             >
@@ -49,7 +49,7 @@ const ServicesChecklist = () => {
               Lorem ipsum dolor sit amet consectetur. Varius tempor id nulla aliquet gravida. Quis at auctor quis lectus velit id parturient bibendum. Amet a erat faucibus enim orci. Praesent magna facilisi erat eget dictumst nulla nunc. Scelerisque cras viverra ipsum at accumsan a. Sed sollicitudin lacinia amet arcu volutpat. Id.
             </p>
 
-            <div className="mt-6 flex justify-end md:hidden">
+            <div className="say-hello-button-mobile mt-6">
               <button
                 type="button"
                 aria-label="Say hello"

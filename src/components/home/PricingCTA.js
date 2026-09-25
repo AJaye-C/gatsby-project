@@ -2,7 +2,7 @@ import * as React from "react";
 
 const PricingCTA = () => (
   <section className="w-full bg-brand-bg py-16 sm:py-20 lg:py-24">
-    <div className="mx-auto max-w-[1280px] px-6 sm:px-10 lg:px-12">
+    <div className="mx-auto max-w-layout-shell px-6 sm:px-10 lg:px-12">
       <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-12 lg:gap-16">
         <div className="lg:col-span-8">
           <h2 className="mb-8 max-w-[18ch] text-3xl font-black leading-[1.05] tracking-tight text-brand-slate sm:max-w-[20ch] sm:text-5xl lg:max-w-[17ch] lg:text-6xl">

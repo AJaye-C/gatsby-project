@@ -20,7 +20,7 @@ const PhotographySection = ({ activeCategory, setActiveCategory }) => {
         />
       </button>
 
-      <div className="mx-auto max-w-[1280px] px-6 sm:px-10 lg:px-12">
+      <div className="mx-auto max-w-layout-shell px-6 sm:px-10 lg:px-12">
         <div className="flex items-center gap-3">
           <img
             src="/figma/icons/icon-shutter.svg"
@@ -45,7 +45,7 @@ const PhotographySection = ({ activeCategory, setActiveCategory }) => {
                     type="button"
                     onMouseEnter={() => setActiveCategory(category.key)}
                     onFocus={() => setActiveCategory(category.key)}
-                    className={`flex w-full items-center justify-start border-b border-black/10 py-3 text-left text-[1.4rem] font-black tracking-[-0.04em] transition-all duration-150 sm:text-[1.65rem] md:text-[2rem] ${
+                    className={`flex w-full items-center justify-start border-b border-black/10 py-3 text-left text-photo-menu font-black transition-all duration-150 sm:text-photo-menu-sm md:text-photo-menu-md ${
                       isActive
                         ? "text-brand-yellow"
                         : "text-brand-slate hover:text-brand-yellow"
