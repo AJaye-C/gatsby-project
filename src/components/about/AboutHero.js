@@ -2,6 +2,7 @@ import * as React from "react";
  
 const AboutHero = () => {
   const [isChatHovered, setIsChatHovered] = React.useState(false);
+  const [isHeroMuted, setIsHeroMuted] = React.useState(true);
  
   return (
     <section className="mx-auto max-w-layout-shell px-4 pb-14 pt-28 sm:px-6 lg:px-8 lg:pt-32">
@@ -23,8 +24,11 @@ const AboutHero = () => {
               src="/figma/videos/hero.mp4"
               autoPlay
               loop
-              muted
+              muted={isHeroMuted}
               playsInline
+              onClick={() => setIsHeroMuted((current) => !current)}
+              aria-label="About page hero video"
+              role="button"
               className="h-[240px] w-full object-cover sm:h-[320px] lg:h-[380px]"
             />
           </div>
@@ -51,11 +55,11 @@ const AboutHero = () => {
               I&apos;D LIKE TO CHAT
  
               <span
-                className={`pointer-events-none absolute left-[60%] top-[-5rem] w-max max-w-[17rem] translate-y-1 rounded-[18px] bg-brand-cyan px-3.5 py-2.5 text-[0.72rem] font-medium leading-[1.3] text-white shadow-[0_10px_22px_rgba(0,0,0,0.12)] transition-all duration-200 ${
-                  isChatHovered ? "translate-y-0 opacity-100" : "opacity-0"
+                className={`pointer-events-none absolute bottom-[calc(100%+0.75rem)] left-1/2 w-max max-w-[calc(100vw-2rem)] -translate-x-1/2 rounded-[18px] bg-brand-cyan px-3.5 py-2.5 text-[0.72rem] font-medium leading-[1.3] text-white shadow-[0_10px_22px_rgba(0,0,0,0.12)] transition-all duration-200 ${
+                  isChatHovered ? "translate-y-0 opacity-100" : "translate-y-1 opacity-0"
                 }`}
               >
-                <span className="absolute -bottom-2 left-6 h-0 w-0 border-x-[8px] border-b-0 border-t-[10px] border-x-transparent border-t-brand-cyan" />
+                <span className="absolute -bottom-2 left-1/2 h-0 w-0 -translate-x-1/2 border-x-[8px] border-b-0 border-t-[10px] border-x-transparent border-t-brand-cyan" />
                 No pressure, we&apos;re just here to help 🙂
               </span>
             </button>

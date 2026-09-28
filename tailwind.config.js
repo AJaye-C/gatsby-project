@@ -18,6 +18,7 @@ module.exports = {
       colors: {
         brand: {
           yellow: "#F5B800",
+          "accent-yellow": "#FCBE17",
           cyan: "#00A8CC",
           teal: "#179CBD",
           slate: "#526E87",

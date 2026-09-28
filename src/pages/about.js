@@ -6,6 +6,10 @@ import AboutHero from "../components/about/AboutHero";
 import AboutStudio from "../components/about/AboutStudio";
 import OurWorks from "../components/about/OurWorks";
 import AboutCompanyTypes from "../components/about/AboutCompanyTypes";
+import WhyUs from "../components/about/WhyUs";
+import PocketPerson from "../components/about/PocketPerson";
+import WorkWith from "../components/about/WorkWith";
+import AboutStory from "../components/about/AboutStory";
 
 const AboutPage = () => (
   <Layout>
@@ -15,6 +19,10 @@ const AboutPage = () => (
       <AboutStudio />
       <OurWorks />
       <AboutCompanyTypes />
+      <WhyUs />
+      <PocketPerson />
+      <WorkWith />
+      <AboutStory />
       <Footer />
     </main>
   </Layout>

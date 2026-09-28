@@ -1,7 +1,10 @@
 import * as React from "react";
 import ClientLogos from "./ClientLogos";
 
-const Hero = () => (
+const Hero = () => {
+  const [isHeroMuted, setIsHeroMuted] = React.useState(true);
+
+  return (
   <div className="mx-auto max-w-layout-shell px-4 pb-14 pt-24 sm:px-6 lg:px-8 lg:pt-28">
     <section className="w-full pb-10 pt-6">
       <div className="flex items-end justify-between gap-4 leading-none md:gap-6">
@@ -37,8 +40,11 @@ const Hero = () => (
             src="/figma/videos/hero.mp4"
             autoPlay
             loop
-            muted
+            muted={isHeroMuted}
             playsInline
+            onClick={() => setIsHeroMuted((current) => !current)}
+            aria-label="Homepage hero video"
+            role="button"
             className="h-[240px] w-full object-cover sm:h-[360px] lg:h-[510px] 2xl:h-[610px]"
           />
         </div>
@@ -63,6 +69,7 @@ const Hero = () => (
       </div>
     </section>
   </div>
-);
+  );
+};
 
 export default Hero;

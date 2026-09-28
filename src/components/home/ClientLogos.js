@@ -1,8 +1,8 @@
 import * as React from "react";
 import { firstSlide, secondSlide } from "../../data/clients";
 
-const ClientLogos = () => (
-  <div className="carousel-viewport pb-1 pt-1 mx-auto xl:mx-0">
+const ClientLogos = ({ className = "" }) => (
+  <div className={`carousel-viewport mx-auto pb-1 pt-1 xl:mx-0 ${className}`}>
     <div className="client-marquee">
       {[firstSlide, secondSlide].map((slide, slideIndex) => (
         <div key={slideIndex} className="flex-shrink-0">

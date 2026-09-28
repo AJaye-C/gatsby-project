@@ -45,7 +45,7 @@ const Header = () => {
             <img src="/figma/images/logo.png" alt="Pocket Creatives" className="h-10 w-16 object-contain sm:h-12 sm:w-20 lg:h-[58px] lg:w-[96px]" />
           </div>
 
-          <nav className="hidden items-center gap-1 lg:flex xl:gap-1.5">
+          <nav className="hidden items-center gap-1 xl:flex xl:gap-1.5">
             {nav.map(({ label, href }) => {
               const active = activeItem === label;
               const contact = label === "Contact";
@@ -84,7 +84,7 @@ const Header = () => {
               aria-expanded={isMenuOpen}
               aria-controls="mobile-navigation-menu"
               onClick={() => setIsMenuOpen((current) => !current)}
-              className="inline-flex h-8 w-8 items-center justify-center bg-transparent text-brand-slate transition-colors duration-200 hover:text-brand-yellow md:hidden"
+              className="inline-flex h-8 w-8 items-center justify-center bg-transparent text-brand-slate transition-colors duration-200 hover:text-brand-yellow xl:hidden"
             >
               {isMenuOpen ? (
                 <span className="relative block h-5 w-5" aria-hidden="true">

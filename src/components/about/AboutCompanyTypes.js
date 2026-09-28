@@ -31,8 +31,7 @@ const AboutCompanyTypes = () => {
   return (
     <section className="w-full overflow-hidden bg-brand-bg py-12 md:py-16 lg:py-20">
       {blocks.map(({ eyebrow, highlight, suffix, paragraphs, image, imageAlt, reverse }, index) => {
-        // Eased-back negative margin for a subtle overlap
-        const verticalShift = index === 0 ? "z-0" : "-mt-4 sm:-mt-6 lg:-mt-12 z-10";
+        const verticalShift = index === 0 ? "z-0" : "z-10";
 
         return (
           <div key={highlight} className={`relative ${verticalShift}`}>
