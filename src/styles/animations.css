@@ -21,6 +21,402 @@
     animation: worksFadeIn 0.5s ease-in-out;
   }
 
+  @keyframes worksCategoryScroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(calc(-50% - 40px)); }
+  }
+
+  .works-category-option:focus-visible,
+  .works-reel-toggle:focus-visible {
+    outline: 2px solid #FCBE17;
+    outline-offset: 3px;
+  }
+
+  .works-reel-viewport {
+    overflow: hidden;
+  }
+
+  .works-category-marquee {
+    display: flex;
+    width: max-content;
+    align-items: flex-start;
+    gap: clamp(24px, 4.1667vw, 80px);
+    padding: 10px 0;
+    animation: worksCategoryScroll 20s linear infinite;
+    will-change: transform;
+  }
+
+  .works-reel-card {
+    position: relative;
+    flex: 0 0 auto;
+    height: clamp(240px, 23.4375vw, 450px);
+    overflow: hidden;
+    background: #dfe4e6;
+  }
+
+  .works-reel-video { width: clamp(427px, 41.6667vw, 800px); }
+  .works-reel-portrait { width: clamp(160px, 15.625vw, 300px); }
+  .works-reel-square { width: clamp(240px, 23.4375vw, 450px); }
+
+  .works-reel-card img,
+  .works-reel-card video {
+    display: block;
+  }
+
+  .works-reel-play {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: flex;
+    width: 48px;
+    height: 48px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #000000;
+    transform: translate(-50%, -50%);
+  }
+
+  .works-reel-play-triangle {
+    display: block;
+    width: 0;
+    height: 0;
+    margin-left: 3px;
+    border-bottom: 7px solid transparent;
+    border-left: 10px solid currentColor;
+    border-top: 7px solid transparent;
+  }
+
+  .works-reel-play .works-reel-play-triangle { color: #ffffff; }
+
+  .works-reel-toggle {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    display: flex;
+    width: 32px;
+    height: 32px;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    border-radius: 50%;
+    background: #FCBE17;
+    color: #111827;
+    transform: translate(-50%, -50%);
+  }
+
+  .works-reel-pause-bars {
+    display: flex;
+    gap: 5px;
+  }
+
+  .works-reel-pause-bars span {
+    display: block;
+    width: 8px;
+    height: 14px;
+    border-radius: 1px;
+    background: currentColor;
+  }
+
+  .works-reel-play-bars .works-reel-play-triangle { color: currentColor; }
+
+  .works-intro-link {
+    min-height: 2rem;
+    transition: transform 0.3s ease;
+  }
+
+  .works-intro-link:hover,
+  .works-intro-link:focus-visible {
+    transform: translateX(0.5rem);
+  }
+
+  .works-intro-arrow-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    flex: 0 0 auto;
+  }
+
+  .works-videography-section {
+    scroll-margin-top: 6rem;
+    background: #efefee;
+  }
+
+  .works-videography-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 2rem 1.5rem;
+  }
+
+  .works-videography-card {
+    min-width: 0;
+    cursor: pointer;
+  }
+
+  .works-videography-card:focus-visible {
+    outline: 2px solid #FCBE17;
+    outline-offset: 4px;
+  }
+
+  .works-videography-preview {
+    display: block;
+    width: 100%;
+    aspect-ratio: 2 / 1;
+    background: #dfe4e6;
+    object-fit: cover;
+  }
+
+  .works-videography-card p {
+    margin-top: 0.5rem;
+    color: #526E87;
+    font-size: 0.88rem;
+    font-weight: 500;
+    line-height: 1.2;
+  }
+
+  .works-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 70;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.94);
+  }
+
+  .works-lightbox-video {
+    width: 100vw;
+    height: 100vh;
+    object-fit: contain;
+  }
+
+  .works-lightbox-close {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    z-index: 1;
+    display: flex;
+    width: 3.5rem;
+    height: 3.5rem;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    border-radius: 50%;
+    background: #FCBE17;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+  }
+
+  .works-lightbox-close:hover,
+  .works-lightbox-close:focus-visible {
+    background: #179CBD;
+    transform: scale(1.05);
+  }
+
+  .works-lightbox-close span {
+    position: absolute;
+    width: 1.5rem;
+    height: 2px;
+    background: #111827;
+  }
+
+  .works-lightbox-close span:first-child { transform: rotate(45deg); }
+  .works-lightbox-close span:last-child { transform: rotate(-45deg); }
+
+  @media (max-width: 1023px) {
+    .works-videography-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 639px) {
+    .works-videography-grid {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 1.5rem;
+    }
+
+    .works-videography-section .mb-8 {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .works-videography-section .mb-8 p {
+      padding-top: 0;
+    }
+  }
+
+  /* Section 4: Photography Section */
+  .works-photography-section {
+    scroll-margin-top: 6rem;
+    background: #efefee;
+  }
+
+  /* 3 Grouped Blocks (4x4 across 3 groups) */
+  .works-photography-grouped-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(2rem, 5vw, 4.5rem);
+  }
+
+  .works-photography-group {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem 1rem;
+  }
+
+  .works-photography-card {
+    min-width: 0;
+    cursor: pointer;
+  }
+
+  .works-photography-card:focus-visible {
+    outline: 2px solid #FCBE17;
+    outline-offset: 4px;
+  }
+
+  .works-photography-thumbnail {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+  }
+
+  .works-photography-card p {
+    margin-top: 0.5rem;
+    color: #526E87;
+    font-size: 0.88rem;
+    font-weight: 500;
+    line-height: 1.2;
+  }
+
+  .works-photo-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 70;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.94);
+    padding: 1rem 0;
+  }
+
+  .works-photo-lightbox-content {
+    display: flex;
+    width: 100%;
+    max-width: 1200px;
+    max-height: 92vh;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: center;
+  }
+
+  .works-photo-lightbox-image-frame {
+    display: flex;
+    width: min(92vw, 1200px);
+    max-height: 65vh;
+    aspect-ratio: 2.39 / 1;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .works-photo-lightbox-image-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .works-photo-slider-viewport {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+    padding: 0.5rem 1rem;
+  }
+
+  .works-photo-slider-viewport::-webkit-scrollbar {
+    display: none;
+  }
+
+  .works-photo-slider-viewport {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .works-photo-slider-track {
+    display: flex;
+    width: max-content;
+    gap: 0.75rem;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+  .works-photo-slider-thumb {
+    width: 80px;
+    height: 56px;
+    flex: 0 0 auto;
+    overflow: hidden;
+    border: 2px solid transparent;
+    padding: 0;
+    opacity: 0.65;
+    background: transparent;
+    cursor: pointer;
+    touch-action: manipulation;
+  }
+
+  .works-photo-slider-thumb.is-active,
+  .works-photo-slider-thumb:hover,
+  .works-photo-slider-thumb:focus-visible {
+    border-color: #FCBE17;
+    opacity: 1;
+  }
+
+  .works-photo-slider-thumb img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  @media (min-width: 640px) {
+    .works-photo-slider-thumb {
+      width: 92px;
+      height: 64px;
+    }
+  }
+
+  @media (max-width: 1023px) {
+    .works-photography-grouped-grid {
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+      gap: 2.5rem;
+    }
+  }
+
+  @media (max-width: 639px) {
+    .works-photography-section .mb-10,
+    .works-photography-section .mb-12 {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .works-photo-lightbox-content,
+    .works-photo-lightbox-image-frame {
+      width: 100%;
+    }
+
+    .works-photo-lightbox-image-frame {
+      max-height: 55vh;
+      padding: 0 1rem;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .works-reel-toggle {
+      position: static;
+      flex: 0 0 auto;
+      transform: none;
+    }
+  }
+
   @keyframes bounce {
     0%, 45% { transform: translateY(0); }
     60% { transform: translateY(60px); }
@@ -729,6 +1125,10 @@
     }
 
     .works-fade-in {
+      animation: none;
+    }
+
+    .works-category-marquee {
       animation: none;
     }
   }
