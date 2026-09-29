@@ -26,8 +26,6 @@ const IndexPage = () => {
       <main className="min-h-screen bg-brand-bg text-brand-slate">
         <Header />
         <Hero />
-        <WorksCategoryReel selectedCategory={worksCategory} onCategoryChange={setWorksCategory} />
-        <WorksGoTo selectedCategory={worksCategory} />
         <VideoCTABanner />
         <div id="videography">
           <VideoScroller />
