@@ -5,7 +5,7 @@ const nav = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about/" },
   { label: "Works", href: "/works/" },
-  { label: "Services", href: "/" },
+  { label: "Services", href: "/services/" },
   { label: "Pricing", href: "/" },
   { label: "Contact", href: "/" },
 ];
@@ -18,7 +18,7 @@ const Header = () => {
   React.useEffect(() => {
     if (typeof window !== "undefined") {
       const pathname = window.location.pathname;
-      setActiveItem(pathname.startsWith("/about") ? "About" : pathname.startsWith("/works") ? "Works" : "Home");
+      setActiveItem(pathname.startsWith("/about") ? "About" : pathname.startsWith("/works") ? "Works" : pathname.startsWith("/services") ? "Services" : "Home");
     }
   }, []);
 

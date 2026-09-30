@@ -56,13 +56,13 @@ const milestones = [
   },
 ];
 
-const StoryArrow = ({ direction, disabled, onClick }) => (
+export const StoryArrow = ({ direction, disabled, onClick, variant = "default" }) => (
   <button
     type="button"
     aria-label={direction === "previous" ? "Previous" : "Next"}
     disabled={disabled}
     onClick={onClick}
-    className={`about-story-arrow section-three-nav ${disabled ? "invisible" : "visible"}`}
+    className={`about-story-arrow section-three-nav ${variant === "inverted" ? "about-story-arrow-inverted" : ""} ${disabled ? "invisible pointer-events-none" : "visible"}`}
   >
     <svg viewBox="0 0 32 32" aria-hidden="true" className={direction === "previous" ? "rotate-180" : ""}>
       <rect className="arrow-bg" x="0" y="0" width="32" height="32" rx="16" />

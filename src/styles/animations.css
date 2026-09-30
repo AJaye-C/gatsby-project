@@ -141,6 +141,320 @@
     background: #efefee;
   }
 
+  .services-video-process {
+    overflow: hidden;
+    background: #efefee;
+    scroll-margin-top: 6rem;
+  }
+
+  .services-video-process-rows {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(3rem, 5vw, 5rem);
+  }
+
+  .services-video-process-row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    padding: 0 1rem;
+  }
+
+  .services-video-process-copy {
+    width: 100%;
+    color: #526E87;
+  }
+
+  .services-video-process-copy-align-end {
+    justify-self: end;
+  }
+
+  .services-video-process-copy h3 {
+    width: 100%;
+    font-size: clamp(2rem, 2.08vw, 2.5rem);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.05em;
+  }
+
+  .services-video-process-copy h4 {
+    width: 100%;
+    margin-top: 1.5rem;
+    font-size: clamp(1.5rem, 1.56vw, 1.875rem);
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -0.05em;
+  }
+
+  .services-video-process-copy p {
+    width: 100%;
+    margin-top: 1.5rem;
+    font-size: 1.25rem;
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: -0.05em;
+  }
+
+  .services-video-process-image {
+    width: 100%;
+  }
+
+  .services-video-process-image img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: auto;
+    object-fit: contain; 
+    background: #efefee;
+  }
+
+  @media (min-width: 1024px) {
+    .services-video-process-row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: clamp(2rem, 5vw, 4rem);
+      row-gap: 0;
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    .services-video-process-row-image-right {
+      grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.3fr);
+      padding-left: 0;
+    }
+
+    .services-video-process-row-image-left {
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.8fr);
+      padding-right: 0;
+    }
+
+    .services-video-process-copy {
+      max-width: 420px;
+      padding: 0;
+    }
+
+    .services-video-process-image-right {
+      width: 100%;
+      max-width: none;
+    }
+
+    .services-video-process-image-left {
+      width: 100%;
+      max-width: none;
+      margin-left: 0;
+      justify-self: start;
+    }
+  }
+
+  /* ==========================================================================
+     Services Section 6: Process Slider
+     Desktop: left edge of viewport sits at the content edge (277px @1920),
+     track bleeds off the right edge. Everything scales from the 1920 Figma
+     frame via --px (1px @1920, capped there, floored at 0.7px for legibility).
+     ========================================================================== */
+
+  .services-process-slider {
+    --px: clamp(0.7px, calc(100vw / 1920), 1px);
+    overflow: hidden;
+  }
+
+  .services-process-slider-viewport {
+    --slide-w: calc(741 * var(--px));   /* 340 text + 55 gap + 346 image */
+    --slide-gap: calc(47 * var(--px));  /* pitch = 788 @1920 */
+
+    margin-left: calc(277 * var(--px));
+    overflow: hidden;
+  }
+
+  .services-process-slider-track {
+    display: flex;
+    width: max-content;
+    gap: var(--slide-gap);
+    transition: transform 0.5s ease;
+    will-change: transform;
+  }
+
+  .services-process-slide {
+    display: flex;
+    align-items: flex-start;
+    gap: calc(55 * var(--px));
+    flex: 0 0 var(--slide-w);
+    width: var(--slide-w);
+    box-sizing: border-box;
+  }
+
+  .services-process-slide-copy {
+    flex: 0 0 calc(340 * var(--px));
+    width: calc(340 * var(--px));
+    color: #526E87;
+  }
+
+  .services-process-slide-copy h2 {
+    font-size: calc(32 * var(--px));
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -0.05em;
+  }
+
+  .services-process-slide-copy ul {
+    margin-top: calc(30 * var(--px));
+    list-style: disc;
+    padding-left: calc(30 * var(--px));
+    font-size: calc(20 * var(--px));
+    line-height: 1.2;
+  }
+
+  .services-process-slide-copy p {
+    margin-top: calc(24 * var(--px));
+    font-size: calc(20 * var(--px));
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: -0.05em;
+  }
+
+  .services-process-slide-image {
+    width: calc(346 * var(--px));
+    height: calc(280 * var(--px));
+    flex: 0 0 calc(346 * var(--px));
+    border-radius: 0.375rem;
+    object-fit: cover;
+  }
+
+  /* "Get in touch" slide: starts 152px past the normal pitch @1920 */
+  .services-process-slide.services-process-contact-slide {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex: 0 0 auto;
+    width: max-content;
+    margin-left: calc(152 * var(--px));
+    font-size: inherit;
+  }
+
+  .services-process-contact-link {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    color: #111111;
+    font-size: calc(125 * var(--px));
+    font-weight: 900;
+    line-height: 1.16;
+    letter-spacing: -0.05em;
+    transition: color 0.25s ease;
+  }
+
+  /* Rule under EACH line, as wide as that line's text. Real borders (not
+     text-decoration) so both rules render at exactly the same thickness. */
+  .services-process-contact-link span {
+    display: block;
+    line-height: 1.096;
+    border-bottom: 0.064em solid currentColor;
+  }
+
+  .services-process-contact-link:hover,
+  .services-process-contact-link:focus-visible {
+    color: #FCBE17;
+  }
+
+  .services-process-slider-controls {
+    display: flex;
+    justify-content: flex-start;
+    gap: 1.5rem;
+    margin-top: calc(52 * var(--px));
+    margin-left: calc(277 * var(--px));
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .services-process-slider-track {
+      transition: none;
+    }
+  }
+
+  /* Tablet: one slide per view, text left / image right */
+  @media (max-width: 1023px) {
+    .services-process-slider-viewport {
+      --slide-w: calc(100vw - 2rem);
+      --slide-gap: 1.5rem;
+      width: calc(100vw - 2rem);
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .services-process-slide {
+      gap: 1.5rem;
+    }
+
+    .services-process-slide-copy {
+      flex: 1 1 0;
+      width: auto;
+    }
+
+    .services-process-slide-copy h2 {
+      font-size: 1.75rem;
+    }
+
+    .services-process-slide-copy ul,
+    .services-process-slide-copy p {
+      font-size: 1rem;
+    }
+
+    .services-process-slide-copy ul {
+      margin-top: 1.25rem;
+      padding-left: 1.25rem;
+    }
+
+    .services-process-slide-copy p {
+      margin-top: 1.25rem;
+    }
+
+    .services-process-slide-image {
+      width: 42%;
+      height: auto;
+      flex: 0 0 42%;
+      aspect-ratio: 346 / 280;
+    }
+
+    .services-process-slide.services-process-contact-slide {
+      width: var(--slide-w);
+      margin-left: 0;
+    }
+
+    .services-process-contact-link {
+      font-size: clamp(3.5rem, 12vw, 7rem);
+    }
+
+    .services-process-slider-controls {
+      width: calc(100vw - 2rem);
+      margin-top: 2rem;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+
+  /* Mobile: text stacked above image */
+  @media (max-width: 767px) {
+    .services-process-slide {
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .services-process-slide-copy,
+    .services-process-slide-image {
+      width: 100%;
+      flex-basis: auto;
+    }
+
+    .services-process-slide-image {
+      height: auto;
+      aspect-ratio: 1.25 / 1;
+    }
+
+    .services-process-contact-link {
+      font-size: clamp(3rem, 12vw, 4.5rem);
+    }
+  }
+
   .works-videography-grid {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -243,13 +557,11 @@
     }
   }
 
-  /* Section 4: Photography Section */
   .works-photography-section {
     scroll-margin-top: 6rem;
     background: #efefee;
   }
 
-  /* 3 Grouped Blocks (4x4 across 3 groups) */
   .works-photography-grouped-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -508,13 +820,11 @@
     }
   }
 
-  /* About Story Section Styling */
   .about-story-section {
     overflow-x: hidden;
     background: #179CBD;
   }
 
-  /* Compact Desktop Height Shell */
   .about-story-panel {
     --story-panel-h: clamp(700px, 52vw, 1100px);
     position: relative;
@@ -559,7 +869,6 @@
 
   .about-story-copy strong { font-weight: 700; }
 
-  /* Timeline Axis Position */
   .about-story-axis {
     position: absolute;
     top: 31vw;
@@ -659,7 +968,6 @@
     letter-spacing: -0.05em;
   }
 
-  /* Desktop Arrow Controls Tightly Anchored Below Timeline Captions */
   .about-story-controls {
     position: absolute;
     bottom: clamp(1.5rem, 2.5vw, 3rem);
@@ -683,7 +991,6 @@
     height: 1.55rem;
   }
 
-  /* Mobile Responsive Settings */
   @media (max-width: 1023px) {
     .about-story-section {
       display: block;
@@ -1017,6 +1324,14 @@
   .section-three-nav .arrow-bg {
     fill: var(--arrow-bg);
     transition: fill 0.25s ease;
+  }
+
+  .section-three-nav.about-story-arrow-inverted {
+    --arrow-bg: #179CBD;
+  }
+
+  .section-three-nav.about-story-arrow-inverted:hover {
+    --arrow-bg: #FCBE17;
   }
 
   .review-card-wrapper {
