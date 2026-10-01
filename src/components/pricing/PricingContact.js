@@ -115,21 +115,22 @@ const PricingContact = () => {
     }
   };
 
-  const inputClassName = "w-full border-0 bg-white px-[30px] py-[26px] text-lg font-normal leading-none tracking-[-0.9px] text-black placeholder:text-brand-slate focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal";
+  const inputClassName = "w-full border-0 bg-white px-5 py-4 text-base sm:px-[30px] sm:py-[26px] sm:text-lg font-normal leading-none tracking-[-0.9px] text-black placeholder:text-brand-slate focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal";
 
   return (
-    <section className="bg-brand-bg px-6 py-20 sm:px-10 md:py-28 lg:px-0 lg:py-[105px]">
-      <div className="mx-auto grid max-w-[1378px] grid-cols-1 items-center gap-16 lg:grid-cols-[486.833px_minmax(0,738px)] lg:gap-[153px]">
+    <section className="bg-brand-bg px-6 py-14 sm:px-10 md:py-24 min-[1440px]:px-0 min-[1440px]:py-[105px]">
+      {/* Stacked below 1280px; two columns from xl, full Figma widths at 1440+ */}
+      <div className="mx-auto grid max-w-[1378px] grid-cols-1 items-center gap-10 md:gap-14 xl:grid-cols-[minmax(0,420px)_minmax(0,738px)] xl:justify-center xl:gap-12 min-[1440px]:grid-cols-[486.833px_minmax(0,738px)] min-[1440px]:gap-[153px]">
         <div>
-          <h2 className="text-6xl font-bold leading-none tracking-[-3px] text-brand-teal sm:text-7xl lg:text-[80px] lg:tracking-[-4px]">
+          <h2 className="text-5xl font-bold leading-none tracking-[-2.5px] text-brand-teal sm:text-6xl md:text-7xl xl:text-[64px] xl:tracking-[-3px] min-[1440px]:text-[80px] min-[1440px]:tracking-[-4px]">
             Get In Touch
           </h2>
-          <p className="mt-[34px] max-w-[510px] text-3xl font-medium leading-none tracking-[-1.5px] text-brand-slate sm:text-4xl lg:text-[40px] lg:tracking-[-2px]">
+          <p className="mt-5 max-w-[510px] text-2xl font-medium leading-none tracking-[-1.2px] text-brand-slate sm:mt-6 sm:text-3xl md:text-4xl xl:text-[32px] xl:tracking-[-1.6px] min-[1440px]:mt-[34px] min-[1440px]:text-[40px] min-[1440px]:tracking-[-2px]">
             Drop us a mail, let us know your budget, and we&apos;ll share what we can offer
           </p>
         </div>
 
-        <form noValidate onSubmit={handleSubmit} className="w-full" aria-describedby="pricing-contact-status">
+        <form noValidate onSubmit={handleSubmit} className="relative w-full max-w-[738px] xl:max-w-none" aria-describedby="pricing-contact-status">
           <div className="absolute -left-[10000px] h-px w-px overflow-hidden" aria-hidden="true">
             <label htmlFor="pricing-contact-company">Company</label>
             <input
@@ -141,7 +142,7 @@ const PricingContact = () => {
             />
           </div>
 
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-[22.5px]">
+          <div className="grid grid-cols-1 gap-5 md:grid-cols-3 md:gap-[22.5px]">
             {[
               { field: "name", type: "text", placeholder: "John Doe", autoComplete: "name" },
               { field: "email", type: "email", placeholder: "johndoe@example.com", autoComplete: "email" },
@@ -152,7 +153,7 @@ const PricingContact = () => {
 
               return (
                 <div key={field}>
-                  <label htmlFor={`pricing-contact-${field}`} className="block text-xl font-extrabold leading-none tracking-[-1px] text-black">
+                  <label htmlFor={`pricing-contact-${field}`} className="block text-base font-extrabold leading-none tracking-[-0.8px] text-black sm:text-lg min-[1440px]:text-xl min-[1440px]:tracking-[-1px]">
                     {fieldLabels[field]} <span aria-hidden="true" className="text-[#EA4335]">*</span>
                   </label>
                   <input
@@ -169,7 +170,7 @@ const PricingContact = () => {
                     value={values[field]}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    className={`${inputClassName} mt-4 h-[70.408px]`}
+                    className={`${inputClassName} mt-3 h-14 sm:mt-4 sm:h-[70.408px]`}
                   />
                   {hasError && <p id={errorId} className="mt-2 text-sm font-medium text-[#EA4335]" aria-live="polite">{errors[field]}</p>}
                 </div>
@@ -177,8 +178,8 @@ const PricingContact = () => {
             })}
           </div>
 
-          <div className="mt-6">
-            <label htmlFor="pricing-contact-message" className="block text-xl font-extrabold leading-none tracking-[-1px] text-black">
+          <div className="mt-5 sm:mt-6">
+            <label htmlFor="pricing-contact-message" className="block text-base font-extrabold leading-none tracking-[-0.8px] text-black sm:text-lg min-[1440px]:text-xl min-[1440px]:tracking-[-1px]">
               {fieldLabels.message} <span aria-hidden="true" className="text-[#EA4335]">*</span>
             </label>
             <textarea
@@ -193,16 +194,16 @@ const PricingContact = () => {
               value={values.message}
               onChange={handleChange}
               onBlur={handleBlur}
-              className={`${inputClassName} mt-4 min-h-[177px] resize-y`}
+              className={`${inputClassName} mt-3 min-h-[160px] resize-y sm:mt-4 sm:min-h-[177px]`}
             />
             {touched.message && errors.message && <p id="pricing-contact-message-error" className="mt-2 text-sm font-medium text-[#EA4335]" aria-live="polite">{errors.message}</p>}
           </div>
 
-          <div className="mt-[21.69px] flex justify-end">
+          <div className="mt-5 flex sm:justify-end min-[1440px]:mt-[21.69px]">
             <button
               type="submit"
               disabled={isSubmitting}
-              className="rounded-full bg-brand-accent-yellow px-[61px] py-5 text-xl font-extrabold leading-none tracking-[-1px] text-black transition-colors duration-200 ease-in-out hover:bg-brand-teal hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal focus-visible:ring-offset-2 disabled:cursor-wait disabled:opacity-60"
+              className="w-full rounded-full bg-brand-accent-yellow px-[61px] py-4 text-lg sm:w-auto sm:py-5 sm:text-xl font-extrabold leading-none tracking-[-1px] text-black transition-colors duration-200 ease-in-out hover:bg-brand-teal hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal focus-visible:ring-offset-2 disabled:cursor-wait disabled:opacity-60"
             >
               {isSubmitting ? "Sending..." : "Send"}
             </button>

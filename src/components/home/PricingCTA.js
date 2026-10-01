@@ -1,11 +1,11 @@
 import * as React from "react";
 
 const PricingCTA = () => (
-  <section className="w-full bg-brand-bg py-16 sm:py-20 lg:py-24">
+  <section className="w-full overflow-x-clip bg-brand-bg py-16 sm:py-20 lg:py-24">
     <div className="mx-auto max-w-layout-shell px-6 sm:px-10 lg:px-12">
       <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-12 lg:gap-16">
         <div className="lg:col-span-8">
-          <h2 className="mb-8 max-w-[18ch] text-3xl font-black leading-[1.05] tracking-tight text-brand-slate sm:max-w-[20ch] sm:text-5xl lg:max-w-[17ch] lg:text-6xl">
+          <h2 className="mb-8 max-w-[18ch] text-[1.9rem] font-black leading-[1.05] tracking-tight text-brand-slate sm:max-w-[20ch] sm:text-5xl lg:max-w-[17ch] lg:text-6xl">
             <span className="text-brand-yellow">We value</span>{" "}
             <span className="text-brand-teal">transparency,</span>{" "}
             <span className="text-brand-slate">so let&apos;s talk about pricing.</span>
@@ -20,10 +20,10 @@ const PricingCTA = () => (
           </p>
         </div>
 
-        <div className="flex h-full flex-col items-start justify-between space-y-12 lg:col-span-4 lg:items-end lg:space-y-24">
+        <div className="flex h-full flex-col items-start justify-between gap-8 md:flex-row md:items-center lg:col-span-4 lg:flex-col lg:items-end lg:gap-24">
           <button
             type="button"
-            className="rounded-lg bg-brand-yellow px-6 py-2.5 text-sm font-bold text-brand-text-dark shadow-md transition-transform duration-200 hover:scale-105 hover:bg-brand-teal hover:text-white sm:text-base"
+            className="min-h-[44px] rounded-lg bg-brand-yellow px-6 py-2.5 text-sm font-bold text-brand-text-dark shadow-md transition-transform duration-200 hover:scale-105 hover:bg-brand-teal hover:text-white sm:text-base"
           >
             View Pricing
           </button>

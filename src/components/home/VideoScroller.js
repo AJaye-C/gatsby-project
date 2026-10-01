@@ -2,40 +2,68 @@ import * as React from "react";
 import { videoCategories } from "../../data/videos";
 import { useVideoCarousel } from "../../hooks/useVideoCarousel";
 
-const VideoScroller = () => {
-  const { activeIndex, mutedMap, videoRefs, goToPrevious, goToNext, toggleMute, handleDragStart, handleDragEnd } = useVideoCarousel();
-  const [isLetsTalkHovered, setIsLetsTalkHovered] = React.useState(false);
+const LetsTalkButton = ({ className = "" }) => {
+  const [isHovered, setIsHovered] = React.useState(false);
 
   return (
-    <section className="w-full bg-brand-bg py-16 sm:py-20 lg:py-24">
+    <button
+      type="button"
+      className={`section-three-cta -mb-1 items-center justify-center p-0 ${className}`}
+      aria-label="Let's talk"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <img
+        src={isHovered ? "/figma/icons/lets-talk-hvr.svg" : "/figma/icons/lets-talk.svg"}
+        alt="Let's talk"
+        className="h-[84px] w-[84px] object-contain drop-shadow-[0_8px_20px_rgba(23,156,189,0.28)] sm:h-[110px] sm:w-[110px] md:h-[116px] md:w-[116px]"
+      />
+    </button>
+  );
+};
+
+const VideoScroller = () => {
+  const { activeIndex, mutedMap, videoRefs, goToPrevious, goToNext, toggleMute, handleDragStart, handleDragEnd } = useVideoCarousel();
+  const trackRef = React.useRef(null);
+  const [slideStep, setSlideStep] = React.useState(0);
+
+  // One slide = measured card width + gap, so each arrow/swipe moves exactly one video at every breakpoint
+  React.useEffect(() => {
+    const track = trackRef.current;
+    if (!track) return undefined;
+
+    const measure = () => {
+      const card = track.querySelector(".video-card");
+      if (!card) return;
+      const gap = parseFloat(window.getComputedStyle(track).columnGap) || 0;
+      setSlideStep(card.offsetWidth + gap);
+    };
+
+    measure();
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
+  }, []);
+
+  return (
+    <section className="w-full overflow-x-clip bg-brand-bg py-12 sm:py-20 lg:py-24">
       <div className="mx-auto max-w-layout-shell px-4 sm:px-6 lg:px-8">
-        <div className="mb-10 flex items-end justify-between gap-4">
+        <div className="mb-6 flex items-end justify-between gap-4 sm:mb-10">
           <div className="flex items-center gap-3">
             <img src="/figma/icons/icon-play.svg" alt="Play icon" className="h-8 w-8 md:h-10 md:w-10" />
-            <span className="text-[1.7rem] font-medium tracking-[-0.06em] text-brand-slate md:text-[2.2rem]">
+            <span className="text-[1.35rem] font-medium sm:text-[1.7rem] tracking-[-0.06em] text-brand-slate md:text-[2.2rem]">
               Video Production
             </span>
           </div>
 
-          <button
-            type="button"
-            className="section-three-cta -mb-1 flex items-center justify-center p-0"
-            aria-label="Let's talk"
-            onMouseEnter={() => setIsLetsTalkHovered(true)}
-            onMouseLeave={() => setIsLetsTalkHovered(false)}
-          >
-            <img
-              src={isLetsTalkHovered ? "/figma/icons/lets-talk-hvr.svg" : "/figma/icons/lets-talk.svg"}
-              alt="Let's talk"
-              className="h-[110px] w-[110px] object-contain drop-shadow-[0_8px_20px_rgba(23,156,189,0.28)] md:h-[116px] md:w-[116px]"
-            />
-          </button>
+          {/* Header position on sm+; on mobile the CTA moves to the bottom */}
+          <LetsTalkButton className="hidden sm:flex" />
         </div>
 
-        <div className="pb-5" style={{ overflowX: "visible" }}>
+        <div className="pb-5 touch-pan-y" style={{ overflowX: "visible" }}>
           <div
+            ref={trackRef}
             className="video-carousel-track"
-            style={{ transform: `translateX(-${activeIndex * 40 + 18}%)` }}
+            style={{ transform: `translate3d(${-activeIndex * slideStep}px, 0, 0)` }}
             onMouseDown={(event) => handleDragStart(event.clientX)}
             onMouseUp={(event) => handleDragEnd(event.clientX)}
             onMouseLeave={() => handleDragEnd(window.innerWidth)}
@@ -47,7 +75,7 @@ const VideoScroller = () => {
 
               return (
                 <article key={video.title} className="video-card">
-                  <h3 className="mb-4 text-[2.4rem] font-bold tracking-[-0.06em] text-brand-text-dark md:text-[3.2rem]">
+                  <h3 className="mb-4 text-[1.75rem] font-bold tracking-[-0.06em] text-brand-text-dark sm:text-[2.4rem] md:text-[3.2rem]">
                     {video.title}
                   </h3>
 
@@ -78,7 +106,7 @@ const VideoScroller = () => {
 
         <div className="mt-4 flex flex-col items-start gap-3">
           <p className="text-micro-note font-medium italic text-brand-text-muted md:text-micro-note-lg">
-            *Drag to play the next Video, Click to toggle sound
+            *Swipe or drag for the next video, tap to toggle sound
           </p>
 
           <div className="flex items-center gap-2.5">
@@ -86,7 +114,7 @@ const VideoScroller = () => {
               type="button"
               aria-label="Previous video"
               onClick={goToPrevious}
-              className="section-three-nav flex h-9 w-9 items-center justify-center md:h-11 md:w-11"
+              className="section-three-nav flex h-11 w-11 items-center justify-center"
             >
               <svg viewBox="0 0 32 32" aria-hidden="true" className="rotate-180">
                 <rect className="arrow-bg" x="0" y="0" width="32" height="32" rx="16" />
@@ -98,7 +126,7 @@ const VideoScroller = () => {
               type="button"
               aria-label="Next video"
               onClick={goToNext}
-              className="section-three-nav flex h-9 w-9 items-center justify-center md:h-11 md:w-11"
+              className="section-three-nav flex h-11 w-11 items-center justify-center"
             >
               <svg viewBox="0 0 32 32" aria-hidden="true">
                 <rect className="arrow-bg" x="0" y="0" width="32" height="32" rx="16" />
@@ -106,6 +134,9 @@ const VideoScroller = () => {
               </svg>
             </button>
           </div>
+
+          {/* Mobile only: CTA stacked below the controls */}
+          <LetsTalkButton className="flex self-center sm:hidden" />
         </div>
       </div>
     </section>

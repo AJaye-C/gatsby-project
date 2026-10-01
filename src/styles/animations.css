@@ -786,11 +786,12 @@
     will-change: transform;
     padding-right: 0;
     overflow: visible;
-    padding-left: 12vw;
+    padding-left: 0;
   }
 
   .video-card {
-    flex: 0 0 100%;
+    /* Mobile: one video with a peek of the next. JS measures card width + gap, so any basis works. */
+    flex: 0 0 86%;
     min-width: 0;
   }
 
@@ -1334,16 +1335,15 @@
     --arrow-bg: #FCBE17;
   }
 
+  /* Review sizing lives in ReviewsCarousel.js utilities; auto-scroll is handled in JS (no CSS animation) */
   .review-card-wrapper {
     min-width: 0;
     max-width: none;
-    width: 100%;
   }
 
   .review-carousel-track {
     width: 100%;
     animation: none;
-    will-change: transform;
   }
 
   @media (min-width: 768px) {
@@ -1387,16 +1387,6 @@
       font-size: 1.7rem;
     }
 
-    .review-card-wrapper {
-      min-width: 280px;
-      max-width: 340px;
-      width: min(100%, 340px);
-    }
-
-    .review-carousel-track {
-      width: max-content;
-      animation: steppedScroll 18s ease-in-out infinite;
-    }
   }
 
   @media (min-width: 640px) {

@@ -27,6 +27,10 @@ const Header = () => {
       return undefined;
     }
 
+    // Lock page scroll behind the full-screen mobile/tablet menu
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
     const handleEscape = (event) => {
       if (event.key === "Escape") {
         setIsMenuOpen(false);
@@ -34,7 +38,10 @@ const Header = () => {
     };
 
     window.addEventListener("keydown", handleEscape);
-    return () => window.removeEventListener("keydown", handleEscape);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", handleEscape);
+    };
   }, [isMenuOpen]);
 
   return (
@@ -73,7 +80,7 @@ const Header = () => {
               href="#contact"
               aria-label="WhatsApp"
               onClick={() => setIsMenuOpen(false)}
-              className="group inline-flex h-10 w-10 items-center justify-center rounded-full border border-brand-line bg-white text-[#0f172a] transition-all duration-200 hover:bg-social-whatsapp hover:text-white"
+              className="group inline-flex h-11 w-11 items-center justify-center rounded-full border border-brand-line bg-white text-[#0f172a] transition-all duration-200 hover:bg-social-whatsapp hover:text-white"
             >
               <img src="/figma/icons/icon-whatsapp.svg" alt="WhatsApp" className="h-5 w-5 transition duration-200 group-hover:brightness-0 group-hover:invert" />
             </a>
@@ -84,7 +91,7 @@ const Header = () => {
               aria-expanded={isMenuOpen}
               aria-controls="mobile-navigation-menu"
               onClick={() => setIsMenuOpen((current) => !current)}
-              className="inline-flex h-8 w-8 items-center justify-center bg-transparent text-brand-slate transition-colors duration-200 hover:text-brand-yellow xl:hidden"
+              className="inline-flex h-11 w-11 items-center justify-center bg-transparent text-brand-slate transition-colors duration-200 hover:text-brand-yellow xl:hidden"
             >
               {isMenuOpen ? (
                 <span className="relative block h-5 w-5" aria-hidden="true">

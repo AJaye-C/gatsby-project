@@ -5,7 +5,7 @@ const Hero = () => {
   const [isHeroMuted, setIsHeroMuted] = React.useState(true);
 
   return (
-  <div className="mx-auto max-w-layout-shell px-4 pb-14 pt-24 sm:px-6 lg:px-8 lg:pt-28">
+  <div className="mx-auto max-w-layout-shell overflow-x-clip px-4 pb-10 pt-24 sm:px-6 sm:pb-14 lg:px-8 lg:pt-28">
     <section className="w-full pb-10 pt-6">
       <div className="flex items-end justify-between gap-4 leading-none md:gap-6">
         <img src="/figma/images/logo.png" alt="Pocket Creatives" className="h-[76px] w-[145px] object-contain sm:h-[94px] sm:w-[175px] lg:h-[115px] lg:w-[204px]" />
@@ -45,12 +45,12 @@ const Hero = () => {
             onClick={() => setIsHeroMuted((current) => !current)}
             aria-label="Homepage hero video"
             role="button"
-            className="h-[240px] w-full object-cover sm:h-[360px] lg:h-[510px] 2xl:h-[610px]"
+            className="aspect-video w-full cursor-pointer object-cover sm:aspect-auto sm:h-[360px] md:h-[420px] lg:h-[510px] 2xl:h-[610px]"
           />
         </div>
       </div>
 
-      <div className="mt-10 mx-auto grid items-center justify-center gap-8 md:gap-12 xl:grid-cols-[1fr_1fr]">
+      <div className="mx-auto mt-8 grid min-w-0 grid-cols-1 items-center justify-center gap-8 sm:mt-10 md:gap-12 xl:grid-cols-[1fr_1fr]">
         <div className="mx-auto max-w-copy-narrow pt-2 pr-0 xl:mx-0 xl:justify-self-center xl:pr-4">
           <p className="text-section-kicker font-medium text-brand-slate">
             As you see, we’ve <span className="font-black text-brand-yellow">partnered</span>

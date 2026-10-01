@@ -6,7 +6,7 @@ const TeamSection = () => {
   const { activeTeamId, setActiveTeamId, activeMember } = useActiveTeamMember();
 
   return (
-    <section className="w-full bg-brand-bg py-16 sm:py-20 lg:py-24">
+    <section className="w-full overflow-x-clip bg-brand-bg py-16 sm:py-20 lg:py-24">
       <div className="mx-auto max-w-layout-shell px-6 sm:px-10 lg:px-12">
         <div className="lg:hidden">
           <h2 className="mb-5 text-2xl font-black text-brand-slate sm:text-3xl">Meet the Team</h2>
@@ -21,7 +21,7 @@ const TeamSection = () => {
                   key={member.id}
                   type="button"
                   onClick={() => setActiveTeamId(member.id)}
-                  className={`rounded-full px-4 py-1.5 text-sm font-semibold transition-colors duration-200 ${
+                  className={`rounded-full px-4 py-2 text-sm font-semibold transition-colors duration-200 sm:text-base ${
                     isActive ? "bg-brand-yellow text-white" : "text-brand-text-muted hover:bg-brand-teal hover:text-white"
                   }`}
                 >
@@ -31,17 +31,17 @@ const TeamSection = () => {
             })}
           </div>
 
-          <div className="mt-6 grid grid-cols-[1fr_auto] items-start gap-4">
+          <div className="mt-6 grid grid-cols-[1fr_auto] items-start gap-4 md:grid-cols-[minmax(0,360px)_1fr] md:gap-8">
             <div className="overflow-hidden rounded-[20px] shadow-md">
               <img
                 src={activeMember.image}
                 alt={`${activeMember.firstName} ${activeMember.lastName}`}
-                className="aspect-[4/5] w-full object-cover"
+                className="aspect-[4/5] w-full object-cover md:max-h-[460px]"
               />
             </div>
 
             <div className="flex flex-col items-start gap-4">
-              <h3 className="text-3xl font-black leading-[0.95] tracking-[-0.06em] text-brand-slate">
+              <h3 className="text-3xl font-black leading-[0.95] tracking-[-0.06em] text-brand-slate md:text-5xl">
                 <span className="block text-brand-yellow">{activeMember.firstName}</span>
                 <span className="block text-xl font-black text-brand-teal">{activeMember.lastName}</span>
               </h3>
@@ -79,17 +79,17 @@ const TeamSection = () => {
             </div>
           </div>
 
-          <div className="mt-6 max-w-[22rem]">
+          <div className="mt-6 max-w-[22rem] md:max-w-none">
             <div className="flex flex-wrap gap-x-3 gap-y-2">
               {activeMember.roles.map((role) => (
-                <span key={role} className="text-sm font-bold tracking-tight text-brand-slate">
+                <span key={role} className="text-sm font-bold tracking-tight text-brand-slate md:text-base">
                   {role}
                 </span>
               ))}
             </div>
           </div>
 
-          <p className="mt-6 text-base leading-relaxed text-brand-text-muted">
+          <p className="mt-6 max-w-2xl text-base leading-relaxed text-brand-text-muted md:text-lg">
             {activeMember.bio}
           </p>
         </div>

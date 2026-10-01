@@ -2,19 +2,19 @@ import * as React from "react";
 import { footerQuickLinks, footerSocials } from "../../data/footer";
 
 const Footer = () => (
-  <footer className="w-full bg-brand-teal pt-16 pb-8 text-white sm:pt-20 lg:pt-24">
+  <footer className="w-full overflow-x-clip bg-brand-teal pt-16 pb-8 text-white sm:pt-20 lg:pt-24">
     <div className="mx-auto max-w-layout-shell px-6 sm:px-10 lg:px-12">
-      <h2 className="mb-12 max-w-4xl text-3xl font-medium leading-[1.05] tracking-tight text-white sm:mb-16 sm:text-5xl lg:text-6xl">
+      <h2 className="mb-10 max-w-4xl text-[1.9rem] font-medium leading-[1.05] tracking-tight text-white sm:mb-16 sm:text-5xl lg:text-6xl">
         We&apos;d love to chat about how we can help you with your next project, get in touch!
       </h2>
 
       <div className="mb-16 grid grid-cols-1 gap-8 md:grid-cols-[1.5fr_0.8fr] md:items-end">
         <div className="space-y-8">
-          <div className="grid gap-10 sm:grid-cols-2">
+          <div className="grid gap-8 sm:grid-cols-2 sm:gap-10">
             <div className="space-y-4">
               <a
                 href="mailto:team@pocketcreatives.co.uk"
-                className="block text-lg font-bold text-black underline underline-offset-4 transition-colors duration-200 hover:text-brand-yellow sm:text-2xl"
+                className="block break-words text-base font-bold text-black underline underline-offset-4 transition-colors duration-200 hover:text-brand-yellow min-[400px]:text-lg sm:text-xl lg:text-2xl"
               >
                 team@pocketcreatives.co.uk
               </a>
@@ -31,14 +31,14 @@ const Footer = () => (
             </a>
           </div>
 
-          <div className="max-w-xs">
+          <div className="w-full max-w-xs sm:max-w-sm">
             <label className="mb-2 block text-xs font-semibold text-white sm:text-sm">Sign up to our Newsletter</label>
             <div className="flex items-center gap-3">
               <div className="flex-1 overflow-hidden rounded-sm bg-white">
                 <input
                   type="email"
                   placeholder="Email"
-                  className="w-full bg-white px-4 py-2 text-sm text-gray-800 placeholder:text-gray-400 focus:outline-none"
+                  className="w-full bg-white px-4 py-3 text-base text-gray-800 placeholder:text-gray-400 focus:outline-none"
                   aria-label="Email address"
                 />
               </div>
@@ -91,13 +91,13 @@ const Footer = () => (
       </div>
 
       <div className="mt-6 flex flex-col items-center justify-between gap-4 pt-6 md:flex-row">
-        <div className="flex items-center gap-4 text-xl sm:text-2xl">
+        <div className="flex flex-wrap items-center justify-center gap-2 text-xl sm:gap-3 sm:text-2xl md:justify-start">
           {footerSocials.map((social) => (
             <a
               key={social.name}
               href={social.icon}
               aria-label={social.name}
-              className="inline-flex h-8 w-8 items-center justify-center transition-colors duration-200 hover:text-brand-yellow"
+              className="inline-flex h-11 w-11 items-center justify-center transition-colors duration-200 hover:text-brand-yellow"
             >
               <img src={social.icon} alt={social.name} className="h-5 w-5 object-contain" />
             </a>
