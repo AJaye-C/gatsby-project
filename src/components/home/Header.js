@@ -6,8 +6,8 @@ const nav = [
   { label: "About", href: "/about/" },
   { label: "Works", href: "/works/" },
   { label: "Services", href: "/services/" },
-  { label: "Pricing", href: "/" },
-  { label: "Contact", href: "/" },
+  { label: "Pricing", href: "/pricing/" },
+  { label: "Contact", href: "/contact/" },
 ];
 const socialRows = [footerSocials.slice(0, 5), footerSocials.slice(5)];
 
@@ -18,7 +18,7 @@ const Header = () => {
   React.useEffect(() => {
     if (typeof window !== "undefined") {
       const pathname = window.location.pathname;
-      setActiveItem(pathname.startsWith("/about") ? "About" : pathname.startsWith("/works") ? "Works" : pathname.startsWith("/services") ? "Services" : "Home");
+      setActiveItem(pathname.startsWith("/about") ? "About" : pathname.startsWith("/works") ? "Works" : pathname.startsWith("/services") ? "Services" : pathname.startsWith("/pricing") ? "Pricing" : pathname.startsWith("/contact") ? "Contact" : "Home");
     }
   }, []);
 
@@ -55,10 +55,10 @@ const Header = () => {
                   key={label}
                   href={href}
                   className={`rounded-full px-3 py-2 text-[0.8rem] font-medium tracking-[-0.03em] transition-all duration-200 xl:px-4 xl:text-[0.95rem] ${
-                    active
-                      ? "bg-brand-yellow text-brand-text-dark shadow-[0_2px_0_rgba(0,0,0,0.12)]"
-                      : contact
-                        ? "bg-brand-cyan text-white shadow-[0_2px_0_rgba(0,0,0,0.12)]"
+                    contact
+                      ? "bg-brand-cyan text-white shadow-[0_2px_0_rgba(0,0,0,0.12)] hover:bg-brand-yellow hover:text-brand-text-dark"
+                      : active
+                        ? "bg-brand-yellow text-brand-text-dark shadow-[0_2px_0_rgba(0,0,0,0.12)]"
                         : "text-brand-text-dark hover:bg-brand-yellow hover:text-brand-text-dark"
                   }`}
                 >

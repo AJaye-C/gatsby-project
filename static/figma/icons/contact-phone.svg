@@ -1,0 +1,13 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="104" height="104" viewBox="0 0 104 104" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Group 64">
+<circle id="Ellipse 2" cx="52" cy="52" r="52" fill="#FCBE17"/>
+<g id="phone-solid 1" clip-path="url(#clip0_0_12)">
+<path id="Vector" d="M43.4932 32.1606C42.8164 30.5258 41.0322 29.6557 39.3271 30.1215L31.5928 32.2309C30.0635 32.6528 29 34.0414 29 35.6235C29 57.3676 46.6309 74.9985 68.375 74.9985C69.957 74.9985 71.3457 73.935 71.7676 72.4057L73.877 64.6713C74.3428 62.9663 73.4727 61.1821 71.8379 60.5053L63.4004 56.9897C61.9678 56.392 60.3066 56.8051 59.3311 58.0092L55.7803 62.3422C49.5928 59.4155 44.583 54.4057 41.6562 48.2182L45.9893 44.6762C47.1934 43.6918 47.6064 42.0395 47.0088 40.6069L43.4932 32.1694V32.1606Z" fill="black"/>
+</g>
+</g>
+<defs>
+<clipPath id="clip0_0_12">
+<rect width="45" height="45" fill="white" transform="translate(29 30)"/>
+</clipPath>
+</defs>
+</svg>

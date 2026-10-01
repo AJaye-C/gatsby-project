@@ -6,7 +6,7 @@ const placeholderCopy = "Lorem ipsum dolor sit amet consectetur. Nulla purus rho
 const ServicesVideoIntro = () => (
   <WorksGoTo
     sectionId="video-intro"
-    headingLines={["Aaaand Action:", "Video Production."]}
+    headingLines={["Aaaand Action:", "Video Production"]}
     paragraph={placeholderCopy}
     links={[
       { label: "Videography", href: "#video-process" },
