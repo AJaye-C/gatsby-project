@@ -1,5 +1,16 @@
 import * as React from "react";
+import { Link } from "gatsby";
 import { footerQuickLinks, footerSocials } from "../../data/footer";
+
+const footerRoutes = {
+  HOME: "/",
+  ABOUT: "/about/",
+  WORKS: "/works/",
+  SERVICES: "/services/",
+  PRICING: "/pricing/",
+  CONTACT: "/contact/",
+  BLOGS: "/blog/",
+};
 
 const Footer = () => (
   <footer className="w-full overflow-x-clip bg-brand-teal pt-16 pb-8 text-white sm:pt-20 lg:pt-24">
@@ -75,13 +86,19 @@ const Footer = () => (
         <h3 className="mb-4 text-lg font-bold text-black">QuickLinks</h3>
         <nav className="flex flex-wrap gap-x-6 gap-y-2 text-xs font-semibold uppercase tracking-wider text-white sm:text-sm">
           {footerQuickLinks.map((link) => (
-            <a
+            footerRoutes[link] ? (
+            <Link
               key={link}
-              href="#"
+              to={footerRoutes[link]}
               className="cursor-pointer transition-colors duration-200 hover:text-brand-yellow"
             >
               {link}
-            </a>
+            </Link>
+            ) : (
+              <span key={link} className="cursor-default" title={`${link} page is not available yet`}>
+                {link}
+              </span>
+            )
           ))}
         </nav>
       </div>
