@@ -1,120 +1,8 @@
 import * as React from "react";
-
-const initialValues = {
-  name: "",
-  email: "",
-  phone: "",
-  message: "",
-};
-
-const fieldLabels = {
-  name: "What's your name?",
-  email: "Your email address?",
-  phone: "Your contact number?",
-  message: "How can we help?",
-};
-
-const validateField = (field, value) => {
-  const trimmedValue = value.trim();
-
-  if (!trimmedValue) {
-    return `${fieldLabels[field]} is required.`;
-  }
-
-  if (field === "email" && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmedValue)) {
-    return "Please enter a valid email address.";
-  }
-
-  if (field === "phone") {
-    const digitCount = (trimmedValue.match(/\d/g) || []).length;
-    if (!/^[\d\s+()\-]+$/.test(trimmedValue) || digitCount < 7 || digitCount > 15) {
-      return "Please enter a valid phone number.";
-    }
-  }
-
-  return "";
-};
+import useContactForm, { contactFieldLabels } from "../../hooks/useContactForm";
 
 const PricingContact = () => {
-  const [values, setValues] = React.useState(initialValues);
-  const [touched, setTouched] = React.useState({});
-  const [errors, setErrors] = React.useState({});
-  const [isSubmitting, setIsSubmitting] = React.useState(false);
-  const [statusMessage, setStatusMessage] = React.useState("");
-  const [honeypot, setHoneypot] = React.useState("");
-  const fieldRefs = React.useRef({});
-
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setValues((current) => ({ ...current, [name]: value }));
-
-    if (touched[name]) {
-      setErrors((current) => ({ ...current, [name]: validateField(name, value) }));
-    }
-  };
-
-  const handleBlur = (event) => {
-    const { name, value } = event.target;
-    setTouched((current) => ({ ...current, [name]: true }));
-    setErrors((current) => ({ ...current, [name]: validateField(name, value) }));
-  };
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    setStatusMessage("");
-
-    const nextErrors = Object.keys(values).reduce((current, field) => ({
-      ...current,
-      [field]: validateField(field, values[field]),
-    }), {});
-    const invalidField = Object.keys(values).find((field) => nextErrors[field]);
-
-    setTouched({ name: true, email: true, phone: true, message: true });
-    setErrors(nextErrors);
-
-    if (invalidField) {
-      fieldRefs.current[invalidField]?.focus();
-      return;
-    }
-
-    if (honeypot) {
-      setStatusMessage("Thanks, your message has been sent.");
-      return;
-    }
-
-    setIsSubmitting(true);
-
-    try {
-      const endpoint = process.env.GATSBY_CONTACT_FORM_ENDPOINT;
-
-      if (endpoint) {
-        const response = await fetch(endpoint, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(values),
-        });
-
-        if (!response.ok) {
-          throw new Error("Contact form submission failed");
-        }
-
-        setStatusMessage("Thanks, your message has been sent.");
-      } else {
-        // TODO: Configure GATSBY_CONTACT_FORM_ENDPOINT before enabling production submissions.
-        console.info("Pricing contact form payload", values);
-        setStatusMessage("Form validated. The submission endpoint is not configured yet.");
-      }
-
-      setValues(initialValues);
-      setTouched({});
-      setErrors({});
-    } catch (error) {
-      setStatusMessage("We couldn't send your message. Please try again.");
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
+  const { values, touched, errors, isSubmitting, statusMessage, honeypot, setHoneypot, fieldRefs, handleChange, handleBlur, handleSubmit } = useContactForm({ logLabel: "Pricing contact form" });
   const inputClassName = "w-full border-0 bg-white px-5 py-4 text-base sm:px-[30px] sm:py-[26px] sm:text-lg font-normal leading-none tracking-[-0.9px] text-black placeholder:text-brand-slate focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal";
 
   return (
@@ -154,7 +42,7 @@ const PricingContact = () => {
               return (
                 <div key={field}>
                   <label htmlFor={`pricing-contact-${field}`} className="block text-base font-extrabold leading-none tracking-[-0.8px] text-black sm:text-lg min-[1440px]:text-xl min-[1440px]:tracking-[-1px]">
-                    {fieldLabels[field]} <span aria-hidden="true" className="text-[#EA4335]">*</span>
+                    {contactFieldLabels[field]} <span aria-hidden="true" className="text-[#EA4335]">*</span>
                   </label>
                   <input
                     ref={(element) => { fieldRefs.current[field] = element; }}
@@ -180,7 +68,7 @@ const PricingContact = () => {
 
           <div className="mt-5 sm:mt-6">
             <label htmlFor="pricing-contact-message" className="block text-base font-extrabold leading-none tracking-[-0.8px] text-black sm:text-lg min-[1440px]:text-xl min-[1440px]:tracking-[-1px]">
-              {fieldLabels.message} <span aria-hidden="true" className="text-[#EA4335]">*</span>
+              {contactFieldLabels.message} <span aria-hidden="true" className="text-[#EA4335]">*</span>
             </label>
             <textarea
               ref={(element) => { fieldRefs.current.message = element; }}

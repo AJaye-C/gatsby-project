@@ -1,8 +1,9 @@
 import * as React from "react";
 import ClientLogos from "./ClientLogos";
+import useMutedVideo from "../../hooks/useMutedVideo";
 
 const Hero = () => {
-  const [isHeroMuted, setIsHeroMuted] = React.useState(true);
+  const { isMuted, toggleMuted } = useMutedVideo();
 
   return (
   <div className="mx-auto max-w-layout-shell overflow-x-clip px-4 pb-10 pt-24 sm:px-6 sm:pb-14 lg:px-8 lg:pt-28">
@@ -40,9 +41,9 @@ const Hero = () => {
             src="/figma/videos/hero.mp4"
             autoPlay
             loop
-            muted={isHeroMuted}
+            muted={isMuted}
             playsInline
-            onClick={() => setIsHeroMuted((current) => !current)}
+            onClick={toggleMuted}
             aria-label="Homepage hero video"
             role="button"
             className="aspect-video w-full cursor-pointer object-cover sm:aspect-auto sm:h-[360px] md:h-[420px] lg:h-[510px] 2xl:h-[610px]"

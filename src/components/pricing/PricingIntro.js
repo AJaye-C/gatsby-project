@@ -1,7 +1,8 @@
 import * as React from "react";
+import useMutedVideo from "../../hooks/useMutedVideo";
 
 const PricingIntro = () => {
-  const [isVideoMuted, setIsVideoMuted] = React.useState(true);
+  const { isMuted, toggleMuted } = useMutedVideo();
 
   /*
    * Mobile/tablet (<1024): heading -> horizontal video -> paragraphs (single column).
@@ -37,9 +38,9 @@ const PricingIntro = () => {
             src="/figma/videos/hero.mp4"
             autoPlay
             loop
-            muted={isVideoMuted}
+            muted={isMuted}
             playsInline
-            onClick={() => setIsVideoMuted((current) => !current)}
+            onClick={toggleMuted}
             aria-label="Pricing intro video"
             role="button"
             className="aspect-video h-auto w-full cursor-pointer object-cover lg:aspect-[456/643] lg:max-w-[456px]"

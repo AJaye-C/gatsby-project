@@ -2,18 +2,6 @@ import * as React from "react";
 
 const reasons = [
   {
-    title: "We care about how it feels",
-    body: "Good content matters—but so does the experience. From first chat to final edit, we keep things easy, honest, and collaborative. We listen, we guide, and we make sure the process feels smooth from start to finish.",
-  },
-  {
-    title: "We work around you",
-    body: "Every client's different, so we don't approach projects the same way. We're flexible with pricing, clear about costs, and always happy to find smart ways to make your budget go further.",
-  },
-  {
-    title: "We make visuals that speak",
-    body: "We don't just shoot pretty pictures. We tell stories. We use styling, locations, and talent to help your brand stand out and feel real. We want to help you surpass expectations and achieve more than simply keeping up with your competition.",
-  },
-  {
     title: "It's all about service",
     body: "This is a hard industry to develop USPs in – established video and photography companies deliver content to a professional standard these days, and in all shapes and sizes. We take the above as a given and know that we have to deliver quality that goes beyond your budget, but more importantly, we know that you're more likely to come back if we provide a great service and if you've enjoyed the experience.",
   },
@@ -24,6 +12,18 @@ const reasons = [
   {
     title: "For everybody",
     body: "We're privileged to have built this company through providing video and photography for both small businesses and startups through to some of the largest companies in the UK, it's our goal to stay competitive and offer a service that's tailored to fit YOU.\n\nQuality content creation shouldn't just be for those with the greatest spending power – and our modular pricing model means that we can cater for everybody.",
+  },
+  {
+    title: "We care about how it feels",
+    body: "Good content matters—but so does the experience. From first chat to final edit, we keep things easy, honest, and collaborative. We listen, we guide, and we make sure the process feels smooth from start to finish.",
+  },
+  {
+    title: "We work around you",
+    body: "Every client's different, so we don't approach projects the same way. We're flexible with pricing, clear about costs, and always happy to find smart ways to make your budget go further.",
+  },
+  {
+    title: "We make visuals that speak",
+    body: "We don't just shoot pretty pictures. We tell stories. We use styling, locations, and talent to help your brand stand out and feel real. We want to help you surpass expectations and achieve more than simply keeping up with your competition.",
   },
 ];
 

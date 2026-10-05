@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Link } from "gatsby";
  
 const AboutHero = () => {
   const [isChatHovered, setIsChatHovered] = React.useState(false);
@@ -40,7 +41,7 @@ const AboutHero = () => {
             Find out more about our production team, what we stand for and why you would choose us for your next video production or photography shoot.
           </p>
  
-          <div className="mt-8 flex justify-end">
+          <div className="mt-8 flex flex-wrap justify-end gap-3">
             <button
               type="button"
               className="group relative inline-flex items-center gap-3 bg-brand-cyan px-5 py-3 text-sm font-black font-medium tracking-[0.08em] text-brand-text-dark shadow-[0_6px_18px_rgba(0,102,153,0.18)] transition-all duration-200 hover:bg-[#0d9ec6]"
@@ -63,6 +64,12 @@ const AboutHero = () => {
                 No pressure, we&apos;re just here to help 🙂
               </span>
             </button>
+            <Link
+              to="/how-we-work/"
+              className="inline-flex items-center bg-brand-accent-yellow px-5 py-3 text-sm font-bold tracking-[0.08em] text-black shadow-[0_6px_18px_rgba(0,0,0,0.18)] transition-colors duration-200 hover:bg-brand-teal hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal focus-visible:ring-offset-2"
+            >
+              HOW WE WORK
+            </Link>
           </div>
         </div>
       </div>
