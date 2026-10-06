@@ -41,22 +41,43 @@ const PhotographyProcess = ({ rows = photographyRows, variant = "photography" })
   const isVideography = variant === "videography";
 
   return (
-    <section className={`bg-brand-bg px-6 py-20 sm:px-10 lg:px-0 ${isVideography ? "lg:min-h-[1090px] lg:py-[207px]" : "lg:py-[106px]"}`}>
+    <section
+      className={`bg-brand-bg px-8 py-14 sm:px-12 sm:py-20 md:px-16 lg:px-[clamp(64px,4.5vw,150px)] min-[1920px]:px-0 ${
+        isVideography ? "xl:min-h-[1090px] xl:py-[207px]" : "xl:py-[106px]"
+      }`}
+    >
       {/* Same row spacing and text styling for both pages. Row 2 gives its image the wider column (text narrower). */}
-      <div className="mx-auto max-w-[1400px] space-y-16 lg:space-y-[45px]">
+      <div className="mx-auto max-w-[1400px] space-y-12 sm:space-y-16 lg:space-y-[45px]">
         {rows.map(({ heading, image, alt, paragraphs }, index) => (
           <div
             key={heading}
-            className={`grid grid-cols-1 items-center gap-8 ${isVideography ? "lg:gap-[54px]" : "lg:gap-[56px]"} ${
+            className={`grid grid-cols-1 items-center gap-6 sm:gap-8 ${
+              isVideography ? "lg:gap-[clamp(32px,3.75vw,54px)]" : "lg:gap-[clamp(32px,3.9vw,56px)]"
+            } ${
               index === 1
                 ? "lg:grid-cols-[minmax(0,0.52fr)_minmax(0,1fr)] lg:[&>img]:order-2 lg:[&>div]:order-1"
                 : "lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]"
             }`}
           >
-            <img src={image} alt={alt} width="700" height={isVideography ? "405" : "428"} loading="lazy" className={`${isVideography ? "h-[405px]" : "h-[428px]"} w-full object-cover`} />
-            <div className="max-w-[800px] text-xl font-medium leading-none tracking-[-1px] text-brand-slate">
-              <h2 className="mb-6 text-4xl font-bold leading-none tracking-[-2px]">{heading}</h2>
-              <div className="space-y-5">{paragraphs.map((paragraph, paragraphIndex) => <p key={paragraphIndex}>{paragraph}</p>)}</div>
+            <img
+              src={image}
+              alt={alt}
+              width="700"
+              height={isVideography ? "405" : "428"}
+              loading="lazy"
+              className={`aspect-[4/3] h-auto w-full object-cover sm:aspect-[16/10] lg:aspect-auto ${
+                isVideography ? "lg:h-[405px]" : "lg:h-[428px]"
+              }`}
+            />
+            <div className="max-w-[800px] text-base font-medium leading-[1.4] tracking-[-0.5px] text-brand-slate sm:text-lg sm:tracking-[-1px] xl:text-xl xl:leading-none">
+              <h2 className="mb-4 text-3xl font-bold leading-none tracking-[-1px] sm:mb-6 sm:text-4xl sm:tracking-[-2px]">
+                {heading}
+              </h2>
+              <div className="space-y-4 sm:space-y-5">
+                {paragraphs.map((paragraph, paragraphIndex) => (
+                  <p key={paragraphIndex}>{paragraph}</p>
+                ))}
+              </div>
             </div>
           </div>
         ))}

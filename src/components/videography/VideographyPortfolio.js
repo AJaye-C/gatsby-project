@@ -112,16 +112,17 @@ const VideographyPortfolio = () => {
   };
 
   return (
-    <section className="overflow-hidden bg-brand-teal px-6 py-20 text-white sm:px-10 lg:min-h-[1500px] lg:px-0 lg:py-[154px]">
+    <section className="overflow-hidden bg-brand-teal px-8 py-14 text-white sm:px-12 sm:py-20 md:px-16 lg:px-[clamp(64px,4.5vw,150px)] xl:min-h-[1500px] xl:py-[154px] min-[1920px]:px-0">
       <div className="mx-auto max-w-[1340px]">
-        <h2 className="text-4xl font-extrabold leading-none tracking-[-3.5px] sm:text-5xl lg:text-[70px]">
+        <h2 className="break-words text-3xl font-extrabold leading-none tracking-[-1.5px] sm:text-5xl sm:tracking-[-2.5px] lg:text-6xl xl:text-[70px] xl:tracking-[-3.5px]">
           A Snapshot of our Video Production Portfolio
         </h2>
 
+        {/* Tabs scroll sideways when they don't fit */}
         <div
           role="tablist"
           aria-label="Video portfolio categories"
-          className="mt-10 flex gap-6 overflow-x-auto pb-2"
+          className="mt-8 flex gap-2 overflow-x-auto pb-2 sm:mt-10 sm:gap-6"
         >
           {portfolioCategories.map((tab, index) => (
             <button
@@ -136,7 +137,7 @@ const VideographyPortfolio = () => {
               disabled={tab.disabled}
               onClick={() => selectCategory(index)}
               onKeyDown={(event) => handleTabKeyDown(event, index)}
-              className={`shrink-0 rounded-[20px] px-4 py-3 text-xl font-medium leading-none tracking-[-1px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-teal ${
+              className={`shrink-0 rounded-[20px] px-4 py-3 text-base font-medium leading-none tracking-[-0.5px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-teal sm:text-xl sm:tracking-[-1px] ${
                 activeCategory === index
                   ? "bg-brand-accent-yellow font-bold text-black"
                   : "text-white disabled:cursor-not-allowed disabled:opacity-70"
@@ -147,7 +148,7 @@ const VideographyPortfolio = () => {
           ))}
         </div>
 
-        <div className="mt-8 border-[3px] border-white">
+        <div className="mt-6 border-[3px] border-white sm:mt-8">
           <div className="aspect-video bg-brand-teal">
             {item ? (
               <video
@@ -163,15 +164,15 @@ const VideographyPortfolio = () => {
                 className="h-full w-full object-cover"
               />
             ) : (
-              <div className="flex h-full items-center justify-center">
+              <div className="flex h-full items-center justify-center px-4 text-center">
                 Portfolio video pending
               </div>
             )}
           </div>
 
           {/* Media controls */}
-          <div className="relative flex items-center justify-center border-t-[3px] border-white py-4">
-            <div className="flex items-center gap-10">
+          <div className="relative flex items-center justify-center border-t-[3px] border-white px-14 py-4 sm:px-0">
+            <div className="flex items-center gap-6 sm:gap-10">
               <button
                 type="button"
                 aria-label="Previous video"
@@ -228,7 +229,7 @@ const VideographyPortfolio = () => {
               aria-label={isMuted ? "Unmute" : "Mute"}
               aria-pressed={!isMuted}
               onClick={toggleMuted}
-              className="absolute right-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+              className="absolute right-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white sm:right-10"
             >
               {controlIcon(
                 "/figma/icons/vol.svg",
@@ -241,14 +242,14 @@ const VideographyPortfolio = () => {
           {/* Portfolio information */}
           {item && (
             <div className="grid grid-cols-1 border-t-[3px] border-white sm:grid-cols-[1fr_2fr]">
-              <div className="flex min-h-[140px] items-center justify-center bg-white p-6 text-2xl font-bold text-brand-slate">
+              <div className="flex min-h-[88px] items-center justify-center bg-white p-5 text-center text-xl font-bold text-brand-slate sm:min-h-[140px] sm:p-6 sm:text-2xl">
                 {item.clientName}
               </div>
 
-              <div className="p-8 text-white">
-                <h3 className="text-xl font-bold">{item.title}</h3>
+              <div className="p-5 text-white sm:p-8">
+                <h3 className="text-lg font-bold sm:text-xl">{item.title}</h3>
 
-                <p className="mt-4 text-xl font-medium leading-[1.09] tracking-[-1px]">
+                <p className="mt-3 text-base font-medium leading-[1.35] tracking-[-0.5px] sm:mt-4 sm:text-xl sm:tracking-[-1px] xl:leading-[1.09]">
                   {item.description}
                 </p>
               </div>

@@ -47,7 +47,7 @@ const rightImages = [
 ];
 
 const ImageGrid = ({ images }) => (
-  <div className="grid grid-cols-2 gap-[31px_33px]">
+  <div className="grid grid-cols-2 gap-3 sm:gap-[31px_33px]">
     {images.map(([src, alt]) => (
       <img
         key={src}
@@ -63,56 +63,55 @@ const ImageGrid = ({ images }) => (
 );
 
 const Copy = ({ paragraphs }) => (
-  <div className="space-y-5 text-xl font-medium leading-[1.22] tracking-[-1px] text-brand-slate">
+  <div className="space-y-4 text-base font-medium leading-[1.4] tracking-[-0.5px] text-brand-slate sm:space-y-5 sm:text-lg sm:tracking-[-1px] xl:text-xl xl:leading-[1.22]">
     {paragraphs.map((paragraph, index) => (
       <p key={index}>{paragraph}</p>
     ))}
   </div>
 );
 
+// Scales from ~44px on phones to the original 80px on desktop
+const bannerText =
+  "text-center text-[clamp(2.75rem,5.56vw,5rem)] font-extrabold leading-none tracking-[-1.6px]";
+
+// Stacked (below xl): banner → copy → images. Side by side (xl+): the original layout.
 const PhotographyServices = () => (
-  <section className="relative overflow-hidden bg-brand-bg px-6 py-20 sm:px-10 lg:min-h-[1356px] lg:px-0 lg:py-[140px]">
+  <section className="relative overflow-hidden bg-brand-bg px-8 py-14 sm:px-12 sm:py-20 md:px-16 lg:px-[clamp(64px,4.5vw,150px)] xl:min-h-[1356px] xl:py-[140px] min-[1920px]:px-0">
     <h2 className="sr-only">Photography Services</h2>
 
-    <div className="mx-auto grid max-w-[1316px] grid-cols-1 gap-16 lg:grid-cols-2 lg:gap-[34px]">
+    <div className="mx-auto grid max-w-[1316px] grid-cols-1 gap-14 sm:gap-16 xl:grid-cols-2 xl:gap-[34px]">
       {/* Photography */}
       <div className="flex flex-col">
-        <div className="flex h-auto min-h-[122px] items-center justify-center bg-brand-accent-yellow px-6 py-4 lg:h-[122px] lg:py-0">
-          <span
-            aria-hidden="true"
-            className="text-center text-5xl font-extrabold leading-none tracking-[-1.6px] text-black sm:text-6xl lg:text-[80px]"
-          >
+        <div className="flex min-h-[96px] items-center justify-center bg-brand-accent-yellow px-4 py-4 sm:min-h-[122px] sm:px-6 xl:h-[122px] xl:py-0">
+          <span aria-hidden="true" className={`${bannerText} text-black`}>
             Photography
           </span>
         </div>
 
-        <div className="mt-8 lg:mt-[60px]">
+        <div className="mt-6 sm:mt-8 xl:mt-[60px]">
           <Copy paragraphs={leftParagraphs} />
         </div>
 
         {/* Lowered further to align with Services bottom */}
-        <div className="mt-10 lg:mt-[140px]">
+        <div className="mt-8 sm:mt-10 xl:mt-[140px]">
           <ImageGrid images={leftImages} />
         </div>
       </div>
 
       {/* Services */}
       <div className="flex flex-col">
-        <div className="order-2 mt-10 lg:order-1 lg:mt-0">
+        <div className="order-3 mt-8 sm:mt-10 xl:order-1 xl:mt-0">
           <ImageGrid images={rightImages} />
         </div>
 
-        <div className="order-1 mb-10 lg:order-2 lg:mb-0 lg:mt-[56px]">
+        <div className="order-2 mt-6 sm:mt-8 xl:mt-[56px]">
           <Copy paragraphs={rightParagraphs} />
         </div>
 
-        {/* Keep the 60px space below the paragraph */}
-        <div className="order-3 mt-10 lg:mt-[60px]">
-          <div className="flex h-auto min-h-[88px] items-center justify-center bg-brand-teal px-6 py-3 lg:h-[88px] lg:py-0">
-            <span
-              aria-hidden="true"
-              className="text-center text-5xl font-extrabold leading-none tracking-[-1.6px] text-white sm:text-6xl lg:text-[80px]"
-            >
+        {/* Keep the 60px space below the paragraph on desktop */}
+        <div className="order-1 xl:order-3 xl:mt-[60px]">
+          <div className="flex min-h-[72px] items-center justify-center bg-brand-teal px-4 py-3 sm:min-h-[88px] sm:px-6 xl:h-[88px] xl:py-0">
+            <span aria-hidden="true" className={`${bannerText} text-white`}>
               Services
             </span>
           </div>

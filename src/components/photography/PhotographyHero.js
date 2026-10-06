@@ -13,18 +13,18 @@ const PhotographyHero = () => {
   const { isMuted, toggleMuted } = useMutedVideo();
 
   return (
-    <section className="bg-brand-teal px-6 pb-24 pt-28 text-white sm:px-10 lg:min-h-[1269px] lg:px-0 lg:pb-0 lg:pt-[161px]">
+    <section className="bg-brand-teal px-8 pb-16 pt-28 text-white sm:px-12 sm:pb-24 md:px-16 lg:px-[clamp(64px,4.5vw,150px)] lg:pt-[161px] xl:min-h-[1269px] xl:pb-0 min-[1920px]:px-0">
       <div className="mx-auto max-w-[1300px]">
-        <h1 className="max-w-[1196px] font-bold leading-none tracking-[-0.05em] lg:text-[120px] lg:tracking-[-6px]">
-          <span className="block text-[clamp(3.5rem,6.25vw,7.5rem)]">
+        <h1 className="max-w-[1196px] break-words font-bold leading-none tracking-[-0.05em] xl:tracking-[-6px]">
+          <span className="block text-[clamp(2.5rem,6.25vw,7.5rem)]">
             Photography Services
           </span>
-          <span className="mt-2 block text-[clamp(1.5rem,2.083vw,2.5rem)] font-medium leading-[2] tracking-[-2px]">
+          <span className="mt-2 block text-[clamp(1.25rem,2.083vw,2.5rem)] font-medium leading-[1.6] tracking-[-1px] sm:leading-[2] sm:tracking-[-2px]">
             available from <strong className="font-bold">POCKET CREATIVES</strong>
           </span>
         </h1>
 
-        <div className="mt-8 lg:mt-[53px]">
+        <div className="mt-6 sm:mt-8 xl:mt-[53px]">
           <video
             src="/figma/videos/photo-hero.mp4"
             autoPlay
@@ -34,16 +34,16 @@ const PhotographyHero = () => {
             onClick={toggleMuted}
             aria-label="Photography services hero video"
             role="button"
-            className="aspect-[1300/496] w-full cursor-pointer object-cover"
+            className="aspect-[16/10] w-full cursor-pointer object-cover md:aspect-[1300/496]"
           />
 
-          <p className="mt-1 text-base font-medium leading-[2] tracking-[-0.8px]">
+          <p className="mt-1 text-sm font-medium leading-[2] tracking-[-0.8px] sm:text-base">
             *Click on Video to toggle sound
           </p>
         </div>
 
-        <div className="mt-8 grid grid-cols-1 gap-8 lg:mt-[20px] lg:grid-cols-[689px_571px] lg:gap-10">
-          <p className="max-w-[689px] text-2xl font-bold leading-[1.1] tracking-[-2px] sm:text-3xl lg:text-[40px]">
+        <div className="mt-6 grid grid-cols-1 gap-6 sm:mt-8 sm:gap-8 xl:mt-[20px] xl:grid-cols-[minmax(0,689fr)_minmax(0,571fr)] xl:gap-10">
+          <p className="max-w-[689px] text-2xl font-bold leading-[1.15] tracking-[-1px] sm:text-3xl sm:tracking-[-2px] lg:text-4xl xl:text-[40px] xl:leading-[1.1]">
             If you&apos;re looking for expert photography services, you&apos;ve
             come to the{" "}
             <span className="inline bg-brand-accent-yellow px-2 text-black">
@@ -51,9 +51,9 @@ const PhotographyHero = () => {
             </span>
           </p>
 
-          <div className="max-w-[571px] text-xl font-medium leading-none tracking-[-1px]">
+          <div className="max-w-[571px] text-base font-medium leading-[1.4] tracking-[-0.5px] sm:text-lg sm:tracking-[-1px] xl:text-xl xl:leading-none">
             {heroCopy.paragraphs.map((paragraph) => (
-              <p key={paragraph} className="mb-5 last:mb-0">
+              <p key={paragraph} className="mb-4 last:mb-0 sm:mb-5">
                 {paragraph}
               </p>
             ))}
