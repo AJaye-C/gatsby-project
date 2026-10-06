@@ -6,8 +6,10 @@ const ServicesWholePackage = () => (
     sectionId="whole-package"
     headingLines={["We've got it covered:", "The Whole Package"]}
     links={[
-      { label: "Video Production", href: "#video-intro" },
-      { label: "Photography", href: "#photography-intro" },
+      // TODO: temporary entry point, confirm final navigation
+      { label: "Video Production", href: "/videography/" },
+      // TODO: temporary entry point, confirm final navigation
+      { label: "Photography", href: "/photography/" },
     ]}
     linkColorClass="text-white"
   />

@@ -10,6 +10,8 @@ const footerRoutes = {
   PRICING: "/pricing/",
   CONTACT: "/contact/",
   BLOGS: "/blog/",
+  "PHOTOGRAPHY TESTIMONIALS": "/photography-testimonials/",
+  "VIDEOGRAPHY TESTIMONIALS": "/videography-testimonials/",
 };
 
 const Footer = () => (
