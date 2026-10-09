@@ -1,31 +1,7 @@
 import * as React from "react";
 
-const reasons = [
-  {
-    title: "It's all about service",
-    body: "This is a hard industry to develop USPs in – established video and photography companies deliver content to a professional standard these days, and in all shapes and sizes. We take the above as a given and know that we have to deliver quality that goes beyond your budget, but more importantly, we know that you're more likely to come back if we provide a great service and if you've enjoyed the experience.",
-  },
-  {
-    title: "At the right price",
-    body: "Every client has different spending power. Every business has a need for video and photography, and living in an increasingly visual world there's a greater reliance than ever on communicating through visual media. We'll give you a budget breakdown and will work with you to manage your budget in an honest and transparent way. Very often we can make a modest pot go further than you'd think!",
-  },
-  {
-    title: "For everybody",
-    body: "We're privileged to have built this company through providing video and photography for both small businesses and startups through to some of the largest companies in the UK, it's our goal to stay competitive and offer a service that's tailored to fit YOU.\n\nQuality content creation shouldn't just be for those with the greatest spending power – and our modular pricing model means that we can cater for everybody.",
-  },
-  {
-    title: "We care about how it feels",
-    body: "Good content matters—but so does the experience. From first chat to final edit, we keep things easy, honest, and collaborative. We listen, we guide, and we make sure the process feels smooth from start to finish.",
-  },
-  {
-    title: "We work around you",
-    body: "Every client's different, so we don't approach projects the same way. We're flexible with pricing, clear about costs, and always happy to find smart ways to make your budget go further.",
-  },
-  {
-    title: "We make visuals that speak",
-    body: "We don't just shoot pretty pictures. We tell stories. We use styling, locations, and talent to help your brand stand out and feel real. We want to help you surpass expectations and achieve more than simply keeping up with your competition.",
-  },
-];
+// Page-builder layout: "why_us"
+// Fields: heading (Text), intro (Text Area), reasons (Repeater: title, body [Text Area])
 
 const Arrow = ({ direction }) => (
   <svg viewBox="0 0 32 32" aria-hidden="true" className={direction === "previous" ? "rotate-180" : ""}>
@@ -34,9 +10,12 @@ const Arrow = ({ direction }) => (
   </svg>
 );
 
-const WhyUs = () => {
+const WhyUs = ({ heading, intro, reasons = [] }) => {
   const [activeIndex, setActiveIndex] = React.useState(0);
   const [itemsPerPage, setItemsPerPage] = React.useState(3);
+  const [dragOffset, setDragOffset] = React.useState(0);
+  const dragStartX = React.useRef(null);
+  const dragPointerId = React.useRef(null);
 
   React.useEffect(() => {
     const handleResize = () => {
@@ -56,6 +35,8 @@ const WhyUs = () => {
 
   const total = reasons.length;
 
+  if (!total) return null;
+
   const goToPrevious = () => {
     setActiveIndex((prev) => (prev - 1 + total) % total);
   };
@@ -64,16 +45,48 @@ const WhyUs = () => {
     setActiveIndex((prev) => (prev + 1) % total);
   };
 
+  const handlePointerDown = (event) => {
+    dragStartX.current = event.clientX;
+    dragPointerId.current = event.pointerId;
+    event.currentTarget.setPointerCapture(event.pointerId);
+  };
+
+  const handlePointerMove = (event) => {
+    if (dragStartX.current === null || event.pointerId !== dragPointerId.current) return;
+    setDragOffset(event.clientX - dragStartX.current);
+  };
+
+  const handlePointerEnd = (event) => {
+    if (dragStartX.current === null || event.pointerId !== dragPointerId.current) return;
+
+    const distance = event.clientX - dragStartX.current;
+    dragStartX.current = null;
+    dragPointerId.current = null;
+    setDragOffset(0);
+
+    if (Math.abs(distance) < 50) return;
+    if (distance < 0) goToNext();
+    else goToPrevious();
+  };
+
+  const handlePointerCancel = () => {
+    dragStartX.current = null;
+    dragPointerId.current = null;
+    setDragOffset(0);
+  };
+
   return (
     <section className="w-full overflow-hidden bg-brand-accent-yellow pb-16 md:pb-24 lg:pb-[146px]">
       <div className="mx-auto max-w-[1488px] px-4 pt-16 sm:px-6 md:pt-20 lg:px-8 lg:pt-[101px]">
         <h2 className="text-[clamp(3.2rem,6.25vw,7.5rem)] font-extrabold leading-[0.98] tracking-[-0.05em] text-white">
-          Why work with us?
+          {heading}
         </h2>
 
-        <p className="mt-8 max-w-[880px] text-base leading-[1.55] tracking-[-0.02em] text-black sm:text-lg xl:max-w-[960px]">
-          We make content that feels real and works hard. You get a team that listens, adapts, and delivers with care, creativity, and no fuss. We&apos;re here to help you stand out without making things complicated.
-        </p>
+        {intro && (
+          <p className="mt-8 max-w-[880px] text-base leading-[1.55] tracking-[-0.02em] text-black sm:text-lg xl:max-w-[960px]">
+            {intro}
+          </p>
+        )}
 
         {/* Teal Panel Container */}
         <div className="relative mt-12 md:mt-16 lg:mt-[90px]">
@@ -82,14 +95,19 @@ const WhyUs = () => {
               
               {/* Sliding Track */}
               <div
-                className="flex min-h-[380px] sm:min-h-[340px] lg:min-h-[320px] transition-transform duration-500 ease-in-out"
+                className="flex min-h-[380px] cursor-grab select-none touch-none sm:min-h-[340px] lg:min-h-[320px] lg:cursor-grab"
+                onPointerDown={handlePointerDown}
+                onPointerMove={handlePointerMove}
+                onPointerUp={handlePointerEnd}
+                onPointerCancel={handlePointerCancel}
                 style={{
-                  transform: `translateX(-${activeIndex * (100 / itemsPerPage)}%)`,
+                  transform: `translateX(calc(-${activeIndex * (100 / itemsPerPage)}% + ${dragOffset}px))`,
+                  transition: dragOffset === 0 ? "transform 500ms ease-in-out" : "none",
                 }}
               >
-                {reasons.map((reason) => (
+                {reasons.map((reason, index) => (
                   <article
-                    key={reason.title}
+                    key={index}
                     className="flex-shrink-0 min-w-0 pr-6 sm:pr-10 md:pr-12"
                     style={{
                       width: `${100 / itemsPerPage}%`,

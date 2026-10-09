@@ -5,6 +5,7 @@ module.exports = {
     "./src/components/**/*.{js,jsx,ts,tsx}",
     "./src/hooks/**/*.{js,jsx,ts,tsx}",
     "./src/data/**/*.{js,jsx,ts,tsx}",
+    "./src/templates/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
     screens: {
@@ -83,5 +84,5 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/typography")],
 };

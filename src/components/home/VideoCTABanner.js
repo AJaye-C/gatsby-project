@@ -1,17 +1,16 @@
 import * as React from "react";
+import RichText from "./RichText";
 
-const VideoCTABanner = () => (
+// Page-builder layout: "video_cta"  (fields: heading, paragraph)
+const VideoCTABanner = ({ heading, paragraph }) => (
   <section className="w-full bg-brand-yellow py-16 text-white sm:py-24 md:py-36 lg:py-44 xl:py-52">
     <div className="mx-auto max-w-[940px] px-5 sm:px-6 lg:px-8">
       <div className="flex flex-col gap-8 md:gap-10">
-        <h2 className="max-w-content-cta text-display-banner font-black text-white">
-          Take a look at some of our video work...
-        </h2>
+        {/* Yellow background: bold (teal) works here, italic (yellow) would not show */}
+        <RichText as="h2" html={heading} className="max-w-content-cta text-display-banner font-black text-white" />
 
         <div className="flex flex-col items-start gap-6 sm:flex-row sm:gap-8 md:gap-12">
-          <p className="max-w-copy-video text-body-copy text-[#1f2937]">
-            Lorem ipsum dolor sit amet consectetur. Placerat quisque feugiat porta quam ornare. In nec lacinia consectetur placerat vestibulum sem odio. In feugiat elit fames eget lobortis turpis scelerisque tincidunt. Enim.
-          </p>
+          <p className="max-w-copy-video whitespace-pre-line text-body-copy text-[#1f2937]">{paragraph}</p>
           <div className="mt-1 flex shrink-0 items-start justify-center self-center sm:self-start">
             <img
               src="/figma/icons/icon-down.svg"

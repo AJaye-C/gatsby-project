@@ -13,8 +13,11 @@ const HIDE_NEXT_ON_LAST = true;
 const TrainingBehindTheScenes = () => {
   const [activeIndex, setActiveIndex] = React.useState(0);
   const [slideWidth, setSlideWidth] = React.useState(1060);
+  const [dragOffset, setDragOffset] = React.useState(0);
   const viewportRef = React.useRef(null);
   const videoRefs = React.useRef([]);
+  const dragStartX = React.useRef(null);
+  const dragPointerId = React.useRef(null);
   const { isMuted, toggleMuted, resetMuted } = useMutedVideo();
 
   React.useEffect(() => {
@@ -53,6 +56,35 @@ const TrainingBehindTheScenes = () => {
     setActiveIndex(Math.max(0, Math.min(VIDEOS.length - 1, nextIndex)));
   };
 
+  const handlePointerDown = (event) => {
+    dragStartX.current = event.clientX;
+    dragPointerId.current = event.pointerId;
+    event.currentTarget.setPointerCapture(event.pointerId);
+  };
+
+  const handlePointerMove = (event) => {
+    if (dragStartX.current === null || event.pointerId !== dragPointerId.current) return;
+    setDragOffset(event.clientX - dragStartX.current);
+  };
+
+  const handlePointerEnd = (event) => {
+    if (dragStartX.current === null || event.pointerId !== dragPointerId.current) return;
+
+    const distance = event.clientX - dragStartX.current;
+    dragStartX.current = null;
+    dragPointerId.current = null;
+    setDragOffset(0);
+
+    if (Math.abs(distance) < 50) return;
+    goTo(activeIndex + (distance < 0 ? 1 : -1));
+  };
+
+  const handlePointerCancel = () => {
+    dragStartX.current = null;
+    dragPointerId.current = null;
+    setDragOffset(0);
+  };
+
   return (
     <section
       aria-label="Behind the scenes videos"
@@ -86,10 +118,18 @@ const TrainingBehindTheScenes = () => {
             <img src="/figma/icons/icon-arrow-down.svg" alt="" aria-hidden="true" className="h-auto w-8 rotate-90 lg:w-[34px]" />
           </button>
 
-          <div ref={viewportRef} className="order-1 col-span-2 row-start-1 w-full max-w-[1060px] overflow-hidden md:order-2 md:col-auto md:row-auto" aria-live="off">
+          <div
+            ref={viewportRef}
+            className="order-1 col-span-2 row-start-1 w-full max-w-[1060px] touch-none cursor-grab select-none overflow-hidden active:cursor-grabbing md:order-2 md:col-auto md:row-auto"
+            aria-live="off"
+            onPointerDown={handlePointerDown}
+            onPointerMove={handlePointerMove}
+            onPointerUp={handlePointerEnd}
+            onPointerCancel={handlePointerCancel}
+          >
             <div
               className="flex w-max transition-transform duration-500 ease-in-out motion-reduce:transition-none"
-              style={{ transform: `translateX(-${activeIndex * slideWidth}px)` }}
+              style={{ transform: `translateX(-${activeIndex * slideWidth + dragOffset}px)` }}
             >
               {VIDEOS.map((video, index) => {
                 const isActive = index === activeIndex;

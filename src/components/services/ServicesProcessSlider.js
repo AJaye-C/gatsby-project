@@ -32,8 +32,11 @@ const bodyCopy =
 const ServicesProcessSlider = () => {
   const [activeIndex, setActiveIndex] = React.useState(0);
   const [pitch, setPitch] = React.useState(0);
+  const [dragOffset, setDragOffset] = React.useState(0);
   const viewportRef = React.useRef(null);
   const slideRef = React.useRef(null);
+  const dragStartX = React.useRef(null);
+  const dragPointerId = React.useRef(null);
 
   React.useEffect(() => {
     const measurePitch = () => {
@@ -64,12 +67,49 @@ const ServicesProcessSlider = () => {
   const goToPrevious = () => setActiveIndex((current) => Math.max(0, current - 1));
   const goToNext = () => setActiveIndex((current) => Math.min(maxIndex, current + 1));
 
+  const handlePointerDown = (event) => {
+    dragStartX.current = event.clientX;
+    dragPointerId.current = event.pointerId;
+    event.currentTarget.setPointerCapture(event.pointerId);
+  };
+
+  const handlePointerMove = (event) => {
+    if (dragStartX.current === null || event.pointerId !== dragPointerId.current) return;
+    setDragOffset(event.clientX - dragStartX.current);
+  };
+
+  const handlePointerEnd = (event) => {
+    if (dragStartX.current === null || event.pointerId !== dragPointerId.current) return;
+
+    const distance = event.clientX - dragStartX.current;
+    dragStartX.current = null;
+    dragPointerId.current = null;
+    setDragOffset(0);
+
+    if (Math.abs(distance) < 50) return;
+    if (distance < 0) goToNext();
+    else goToPrevious();
+  };
+
+  const handlePointerCancel = () => {
+    dragStartX.current = null;
+    dragPointerId.current = null;
+    setDragOffset(0);
+  };
+
   return (
     <section className="services-process-slider bg-brand-bg py-16 md:py-20 lg:py-24">
-      <div ref={viewportRef} className="services-process-slider-viewport">
+      <div
+        ref={viewportRef}
+        className="services-process-slider-viewport touch-none cursor-grab select-none active:cursor-grabbing"
+        onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
+        onPointerUp={handlePointerEnd}
+        onPointerCancel={handlePointerCancel}
+      >
         <div
           className="services-process-slider-track"
-          style={{ transform: `translateX(-${activeIndex * pitch}px)` }}
+          style={{ transform: `translateX(-${activeIndex * pitch + dragOffset}px)` }}
         >
           {processItems.map((item, index) => (
             <article

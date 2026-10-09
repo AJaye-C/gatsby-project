@@ -1,5 +1,6 @@
 import * as React from "react";
 import { photographyCategories, photographyGallery } from "../../data/photography";
+import { mediaAlt, mediaUrl, slugify } from "../../utils/acf";
 
 const LetsTalkButton = ({ className = "" }) => {
   const [isHovered, setIsHovered] = React.useState(false);
@@ -21,7 +22,33 @@ const LetsTalkButton = ({ className = "" }) => {
   );
 };
 
-const PhotographySection = ({ activeCategory, setActiveCategory }) => {
+// Page-builder layout: "photography"
+// fields: section_label, categories (repeater: title, image)
+const PhotographySection = ({ sectionLabel, categories }) => {
+  // WordPress rows -> { key, label, src, alt }. Falls back to src/data/photography.js if none.
+  const items = React.useMemo(() => {
+    const fromWp = (categories || [])
+      .map((item, index) => ({
+        key: slugify(item.title) || `category-${index}`,
+        label: item.title,
+        src: mediaUrl(item.image),
+        alt: mediaAlt(item.image, `${item.title} photography showcase`),
+      }))
+      .filter((item) => item.label && item.src);
+
+    return fromWp.length
+      ? fromWp
+      : photographyCategories.map((category) => ({
+          key: category.key,
+          label: category.label,
+          src: photographyGallery[category.key],
+          alt: `${category.label} photography showcase`,
+        }));
+  }, [categories]);
+
+  const [activeCategory, setActiveCategory] = React.useState(items[0]?.key);
+  const activeItem = items.find((item) => item.key === activeCategory) || items[0];
+
   return (
     <section className="relative w-full overflow-x-clip bg-brand-bg py-16 sm:py-20 lg:py-24">
       {/* sm+: floating top-right as before (hidden on mobile) */}
@@ -35,14 +62,14 @@ const PhotographySection = ({ activeCategory, setActiveCategory }) => {
             className="h-8 w-8 object-contain md:h-10 md:w-10"
           />
           <h2 className="text-2xl font-medium tracking-tight text-brand-slate md:text-3xl">
-            Photography
+            {sectionLabel}
           </h2>
         </div>
 
         <div className="mt-10 grid grid-cols-1 items-center gap-4 lg:grid-cols-12 lg:gap-4">
           <div className="order-2 lg:order-1 lg:col-span-4">
             <div className="flex flex-col border-t border-black/10">
-              {photographyCategories.map((category) => {
+              {items.map((category) => {
                 const isActive = activeCategory === category.key;
                 const label = isActive ? `View ${category.label}` : category.label;
 
@@ -69,8 +96,8 @@ const PhotographySection = ({ activeCategory, setActiveCategory }) => {
           <div className="order-1 w-full lg:order-2 lg:col-span-8">
             <div className="relative ml-0 overflow-hidden rounded-[16px] lg:ml-[9rem] lg:w-[calc(100%+14rem)] lg:rounded-none">
               <img
-                src={photographyGallery[activeCategory]}
-                alt={`${activeCategory} photography showcase`}
+                src={activeItem?.src}
+                alt={activeItem?.alt || ""}
                 className="block h-[300px] w-full object-cover object-center transition-all duration-300 sm:h-[380px] md:h-[460px] lg:h-[560px] lg:max-w-none"
               />
             </div>

@@ -15,12 +15,20 @@
   },
   "dependencies": {
     "autoprefixer": "^10.4.19",
+    "dotenv": "^18.0.5",
     "gatsby": "^5.14.0",
+    "gatsby-plugin-image": "^3.16.0",
     "gatsby-plugin-postcss": "^6.14.0",
+    "gatsby-plugin-sharp": "^5.16.0",
+    "gatsby-source-wordpress": "^7.17.0",
+    "gatsby-transformer-sharp": "^5.16.0",
     "lucide-react": "^1.47.0",
     "postcss": "^8.4.38",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "tailwindcss": "^3.4.4"
+  },
+  "devDependencies": {
+    "@tailwindcss/typography": "^0.5.20"
   }
 }

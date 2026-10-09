@@ -1,6 +1,7 @@
 import * as React from "react";
 import { videoCategories } from "../../data/videos";
 import { useVideoCarousel } from "../../hooks/useVideoCarousel";
+import { mediaUrl } from "../../utils/acf";
 
 const LetsTalkButton = ({ className = "" }) => {
   const [isHovered, setIsHovered] = React.useState(false);
@@ -22,8 +23,18 @@ const LetsTalkButton = ({ className = "" }) => {
   );
 };
 
-const VideoScroller = () => {
-  const { activeIndex, mutedMap, videoRefs, goToPrevious, goToNext, toggleMute, handleDragStart, handleDragEnd } = useVideoCarousel();
+// Page-builder layout: "video_scroller"
+// fields: section_label, videos (repeater: category_title, video)
+const VideoScroller = ({ sectionLabel, videos }) => {
+  // WordPress rows -> { title, src }. Falls back to src/data/videos.js if none.
+  const items = React.useMemo(() => {
+    const fromWp = (videos || [])
+      .map((item) => ({ title: item.categoryTitle, src: mediaUrl(item.video) }))
+      .filter((item) => item.src);
+    return fromWp.length ? fromWp : videoCategories;
+  }, [videos]);
+
+  const { activeIndex, mutedMap, videoRefs, goToPrevious, goToNext, toggleMute, handleDragStart, handleDragEnd } = useVideoCarousel(items.length);
   const trackRef = React.useRef(null);
   const [slideStep, setSlideStep] = React.useState(0);
 
@@ -51,7 +62,7 @@ const VideoScroller = () => {
           <div className="flex items-center gap-3">
             <img src="/figma/icons/icon-play.svg" alt="Play icon" className="h-8 w-8 md:h-10 md:w-10" />
             <span className="text-[1.35rem] font-medium sm:text-[1.7rem] tracking-[-0.06em] text-brand-slate md:text-[2.2rem]">
-              Video Production
+              {sectionLabel}
             </span>
           </div>
 
@@ -70,11 +81,11 @@ const VideoScroller = () => {
             onTouchStart={(event) => handleDragStart(event.touches[0].clientX)}
             onTouchEnd={(event) => handleDragEnd(event.changedTouches[0].clientX)}
           >
-            {videoCategories.map((video, index) => {
-              const isMuted = Boolean(mutedMap[index]);
+            {items.map((video, index) => {
+              const isMuted = mutedMap[index] !== false; // muted unless the viewer un-muted it
 
               return (
-                <article key={video.title} className="video-card">
+                <article key={`${video.title}-${index}`} className="video-card">
                   <h3 className="mb-4 text-[1.75rem] font-bold tracking-[-0.06em] text-brand-text-dark sm:text-[2.4rem] md:text-[3.2rem]">
                     {video.title}
                   </h3>

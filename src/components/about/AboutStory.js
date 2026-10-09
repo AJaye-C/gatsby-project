@@ -1,60 +1,32 @@
 import * as React from "react";
+import { cleanWpHtml } from "../home/RichText";
 
-const milestones = [
-  {
-    kind: "major",
-    label: "2017",
-    className: "about-story-milestone-2017",
-  },
-  {
-    kind: "dot",
-    caption:
-      "Steven’s professional history started in broadcasting, supporting mainstream television programmes such as BBC’s Watchdog, Crimewatch and Horizon and leading a 10-person team running 24/7 to make this happen.",
-    captionPosition: "below",
-    captionColor: "slate",
-    className: "about-story-dot-1",
-  },
-  {
-    kind: "dot",
-    caption:
-      "But photography and video production was always the passion, and he burnt all the hours in the day running a small, innovative corporate video production company alongside called Screensaver which could boast clients such as Tower Bridge, the Museum of London and the National Portrait Gallery. This paved the way to progress full time into the production world and merged into Tailwind Media into 2010.",
-    captionPosition: "above",
-    captionColor: "slate",
-    className: "about-story-dot-2",
-  },
-  {
-    kind: "dot",
-    caption:
-      "For 6 years, Steven oversaw the production team, making impressive in-roads into the UK corporate video market, working with some of the country’s biggest names. Highlights would include a huge change campaign for Arcadia; helping to update the internal communications video magazine for electronics giant Philips, working with pop star Olly Murs for the Pringles 25th birthday adverts, and overseeing a multitude of projects for Tesco, Currys PC World and Groupon to name just a few.",
-    captionPosition: "below",
-    captionColor: "slate",
-    className: "about-story-dot-3",
-  },
-  {
-    kind: "dot",
-    caption: (
-      <>
-        2015 saw the creation of SMC, after Steven wanted to take a different direction, by offering both video and photography. Haider Romero Perez and Lauren Hodge were invited to join, bringing a wealth of skill, enthusiasm, and drive and within 2 years have become co-owners of the newly incorporated <span className="underline">Pocket Creatives</span>.
-      </>
-    ),
-    captionPosition: "above",
-    captionColor: "slate",
-    className: "about-story-dot-4",
-  },
-  {
-    kind: "dot",
-    caption:
-      "“SMC provided a wonderful opportunity to meet new business owners and establish ourselves in new markets, offering new video and photography services and building a friendly and creative business where we’re building long-term working relationships with our clients. Pocket Creatives couldn’t have been launched without the faith and trust shown in us by our clients, and we look forward to growing alongside them over the years to come.”",
-    captionPosition: "below",
-    captionColor: "slate",
-    className: "about-story-dot-5",
-  },
-  {
-    kind: "major",
-    label: "2025",
-    className: "about-story-milestone-2025",
-  },
+// Page-builder layout: "story_timeline"
+// Fields: heading, intro (WYSIWYG), start_year, end_year, events (Repeater: caption [WYSIWYG]), closing_text (Text Area)
+// Captions alternate below / above the line automatically. Dot positions come from the
+// per-dot CSS classes in global.css, so the timeline supports up to 5 events.
+// IMPORTANT: class names are written out in full (never built with template strings),
+// otherwise Tailwind's purge removes the CSS for them.
+const DOT_CLASSES = [
+  "about-story-dot-1",
+  "about-story-dot-2",
+  "about-story-dot-3",
+  "about-story-dot-4",
+  "about-story-dot-5",
 ];
+const CAPTION_POSITION_CLASSES = {
+  below: "about-story-caption-below",
+  above: "about-story-caption-above",
+};
+const CAPTION_COLOR_CLASSES = {
+  slate: "about-story-caption-slate",
+};
+const MAX_EVENTS = DOT_CLASSES.length;
+
+// Pixels the pointer must travel before it counts as a drag. Capturing the pointer on
+// press would redirect the click away from buttons/cards, so capture only starts after this.
+const DRAG_THRESHOLD = 5;
+
 
 export const StoryArrow = ({ direction, disabled, onClick, variant = "default" }) => (
   <button
@@ -71,14 +43,34 @@ export const StoryArrow = ({ direction, disabled, onClick, variant = "default" }
   </button>
 );
 
-const AboutStory = () => {
+const AboutStory = ({ heading, intro, startYear, endYear, events = [], closingText }) => {
+  if (process.env.NODE_ENV !== "production" && events.length > MAX_EVENTS) {
+    // eslint-disable-next-line no-console
+    console.warn(`[AboutStory] ${events.length} events found, only the first ${MAX_EVENTS} have CSS positions.`);
+  }
+
+  const milestones = [
+    { kind: "major", label: startYear, className: "about-story-milestone-2017" },
+    ...events.slice(0, MAX_EVENTS).map((event, index) => ({
+      kind: "dot",
+      caption: event.caption,
+      captionPosition: index % 2 === 0 ? "below" : "above",
+      captionColor: "slate",
+      className: DOT_CLASSES[index],
+    })),
+    { kind: "major", label: endYear, className: "about-story-milestone-2025" },
+  ];
+
   const [step, setStep] = React.useState(0);
   const [isMobile, setIsMobile] = React.useState(false);
   const [mobileStepCount, setMobileStepCount] = React.useState(0);
   const [mobileStepDistance, setMobileStepDistance] = React.useState(0);
+  const [dragOffset, setDragOffset] = React.useState(0);
   const viewportRef = React.useRef(null);
   const trackRef = React.useRef(null);
-  const touchStartX = React.useRef(null);
+  const dragStartX = React.useRef(null);
+  const dragPointerId = React.useRef(null);
+  const isCaptured = React.useRef(false);
   const offsets = ["0vw", "-47.708vw", "-101.771vw", "-142vw"];
 
   React.useEffect(() => {
@@ -114,34 +106,60 @@ const AboutStory = () => {
     setStep((current) => Math.min(finalStep, Math.max(0, current + direction)));
   };
 
-  const handleTouchStart = (event) => {
-    touchStartX.current = event.touches[0].clientX;
+  const handlePointerDown = (event) => {
+    dragStartX.current = event.clientX;
+    dragPointerId.current = event.pointerId;
+    isCaptured.current = false;
   };
 
-  const handleTouchEnd = (event) => {
-    if (touchStartX.current === null) return;
+  const handlePointerMove = (event) => {
+    if (dragStartX.current === null || event.pointerId !== dragPointerId.current) return;
 
-    const delta = event.changedTouches[0].clientX - touchStartX.current;
-    if (Math.abs(delta) >= 40) {
-      moveTrack(delta < 0 ? 1 : -1);
+    const distance = event.clientX - dragStartX.current;
+    if (!isCaptured.current) {
+      if (Math.abs(distance) < DRAG_THRESHOLD) return;
+      event.currentTarget.setPointerCapture(event.pointerId);
+      isCaptured.current = true;
     }
-
-    touchStartX.current = null;
+    setDragOffset(distance);
   };
 
-  const trackTransform = isMobile
+  const handlePointerEnd = (event) => {
+    if (dragStartX.current === null || event.pointerId !== dragPointerId.current) return;
+
+    const delta = event.clientX - dragStartX.current;
+    dragStartX.current = null;
+    dragPointerId.current = null;
+    setDragOffset(0);
+
+    if (Math.abs(delta) >= 40) moveTrack(delta < 0 ? 1 : -1);
+  };
+
+  const handlePointerCancel = () => {
+    dragStartX.current = null;
+    dragPointerId.current = null;
+    setDragOffset(0);
+  };
+
+  const baseTransform = isMobile
     ? `translateX(-${Math.min(step * mobileStepDistance, Math.max(0, (trackRef.current?.scrollWidth || 0) - (viewportRef.current?.clientWidth || 0)))}px)`
     : `translateX(${offsets[Math.min(step, offsets.length - 1)]})`;
+  const trackTransform = `${baseTransform} translateX(${dragOffset}px)`;
 
   return (
     <section className="about-story-section">
-      <div ref={viewportRef} className="about-story-panel" onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
+      <div
+        ref={viewportRef}
+        className="about-story-panel touch-none cursor-grab select-none active:cursor-grabbing"
+        onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
+        onPointerUp={handlePointerEnd}
+        onPointerCancel={handlePointerCancel}
+      >
         <div ref={trackRef} className="about-story-track" style={{ transform: trackTransform }}>
           <div className="about-story-copy">
-            <h2>Our Story</h2>
-            <p>
-              <strong>Pocket Creatives</strong> launched in the winter of 2017, formed as a limited company following the team working under the name of Steven Mayatt Creative since 2015. Pocket is the next step in our evolution.
-            </p>
+            <h2>{heading}</h2>
+            <p dangerouslySetInnerHTML={{ __html: cleanWpHtml(intro) }} />
           </div>
 
           <div className="about-story-axis" aria-hidden="true" />
@@ -158,21 +176,18 @@ const AboutStory = () => {
             return (
               <div key={milestone.className} className={`about-story-marker about-story-dot ${milestone.className}`}>
                 <p
-                  className={`about-story-caption about-story-caption-${milestone.captionPosition} about-story-caption-${milestone.captionColor}`}
+                  className={`about-story-caption ${CAPTION_POSITION_CLASSES[milestone.captionPosition]} ${CAPTION_COLOR_CLASSES[milestone.captionColor]} [&_strong]:font-normal [&_strong]:underline`}
                   style={{
                     top: milestone.captionPosition === "below" ? "calc(100% + var(--story-caption-gap, 32px))" : "auto",
                     bottom: milestone.captionPosition === "above" ? "calc(100% + var(--story-caption-gap, 32px))" : "auto",
                   }}
-                >
-                  {milestone.caption}
-                </p>
+                dangerouslySetInnerHTML={{ __html: cleanWpHtml(milestone.caption) }}
+                />
               </div>
             );
           })}
 
-          <div className="about-story-2025-copy">
-            Now, embarking on our 6th year in business together, we’ve reached one milestone after the next. We boast an enviable client list, with impressive client retention numbers and have built a genuinely wonderful team around us.
-          </div>
+          <div className="about-story-2025-copy">{closingText}</div>
         </div>
 
         <div className="about-story-controls">

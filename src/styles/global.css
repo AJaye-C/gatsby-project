@@ -40,6 +40,20 @@
   .section-kicker {
     @apply text-brand-slate;
   }
+
+  .blog-content,
+  .blog-content * {
+    color: #526e87 !important;
+  }
+
+  .blog-content h1,
+  .blog-content h2,
+  .blog-content h3,
+  .blog-content h4,
+  .blog-content h5,
+  .blog-content h6 {
+    font-weight: 700;
+  }
 }
 
 .hide-scroll {

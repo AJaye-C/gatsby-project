@@ -7,17 +7,22 @@ const COPIES = 3; // middle copy is the "home" position; we silently jump betwee
 
 const easeInOutCubic = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
 
-const ReviewsCarousel = () => {
-  const count = sectionEightReviews.length;
+// `reviews` = [{ text, name }]. Falls back to src/data/reviews.js if none are passed.
+const ReviewsCarousel = ({ reviews }) => {
+  const reviewList = reviews && reviews.length ? reviews : sectionEightReviews;
+  const count = reviewList.length;
   const loopedReviews = React.useMemo(
-    () => Array.from({ length: COPIES }, (_, copy) => sectionEightReviews.map((review) => ({ review, copy }))).flat(),
-    []
+    () => Array.from({ length: COPIES }, (_, copy) => reviewList.map((review) => ({ review, copy }))).flat(),
+    [reviewList]
   );
   const carouselRef = React.useRef(null);
   const isPausedRef = React.useRef(false);
   const lastStepRef = React.useRef(0);
   const animationRef = React.useRef(0);
   const targetIndexRef = React.useRef(0);
+  const dragStartX = React.useRef(null);
+  const dragStartScrollLeft = React.useRef(0);
+  const dragPointerId = React.useRef(null);
 
   const cancelAnimation = React.useCallback(() => {
     if (animationRef.current) {
@@ -25,6 +30,10 @@ const ReviewsCarousel = () => {
       animationRef.current = 0;
     }
     if (carouselRef.current) carouselRef.current.style.scrollSnapType = "";
+  }, []);
+
+  const disableScrollSnap = React.useCallback(() => {
+    if (carouselRef.current) carouselRef.current.style.scrollSnapType = "none";
   }, []);
 
   // Custom eased glide: native smooth scrolling is short, linear-ish and fights scroll-snap
@@ -70,6 +79,16 @@ const ReviewsCarousel = () => {
     const gap = parseFloat(window.getComputedStyle(track).columnGap) || 16;
     return card.offsetWidth + gap;
   }, []);
+
+  const snapToNearestReview = React.useCallback(() => {
+    const track = carouselRef.current;
+    const step = getStep();
+    if (!track || !step) return;
+
+    const nearestIndex = Math.round(track.scrollLeft / step);
+    targetIndexRef.current = nearestIndex;
+    animateTo(nearestIndex * step);
+  }, [animateTo, getStep]);
 
   const scrollByReview = React.useCallback(
     (direction) => {
@@ -135,6 +154,48 @@ const ReviewsCarousel = () => {
     isPausedRef.current = false;
   };
 
+  const handlePointerDown = (event) => {
+    if (!carouselRef.current) return;
+
+    dragStartX.current = event.clientX;
+    dragStartScrollLeft.current = carouselRef.current.scrollLeft;
+    dragPointerId.current = event.pointerId;
+    pause();
+    cancelAnimation();
+    disableScrollSnap();
+    event.currentTarget.setPointerCapture(event.pointerId);
+  };
+
+  const handlePointerMove = (event) => {
+    if (
+      dragStartX.current === null ||
+      dragPointerId.current !== event.pointerId ||
+      !carouselRef.current
+    ) {
+      return;
+    }
+
+    const distance = event.clientX - dragStartX.current;
+    carouselRef.current.scrollLeft = dragStartScrollLeft.current - distance;
+  };
+
+  const handlePointerEnd = (event) => {
+    if (dragStartX.current === null || dragPointerId.current !== event.pointerId) return;
+
+    dragStartX.current = null;
+    dragStartScrollLeft.current = 0;
+    dragPointerId.current = null;
+    snapToNearestReview();
+    window.setTimeout(resume, AUTOPLAY_MS);
+  };
+
+  const handlePointerCancel = () => {
+    dragStartX.current = null;
+    dragStartScrollLeft.current = 0;
+    dragPointerId.current = null;
+    window.setTimeout(resume, AUTOPLAY_MS);
+  };
+
   return (
     <div
       className="relative left-1/2 right-1/2 -mx-[50vw] w-screen overflow-hidden"
@@ -142,11 +203,6 @@ const ReviewsCarousel = () => {
       onMouseLeave={resume}
       onFocus={pause}
       onBlur={resume}
-      onTouchStart={() => {
-        pause();
-        cancelAnimation();
-      }}
-      onTouchEnd={() => window.setTimeout(resume, AUTOPLAY_MS)}
     >
       <div className="mb-3 flex items-center justify-end gap-2 px-4 sm:px-6 lg:px-8">
         <button
@@ -170,7 +226,11 @@ const ReviewsCarousel = () => {
       <div
         ref={carouselRef}
         onWheel={cancelAnimation}
-        className="review-carousel-track flex snap-x snap-mandatory gap-4 overflow-x-auto overscroll-x-contain px-4 py-2 scroll-pl-4 [scrollbar-width:none] sm:px-6 sm:scroll-pl-6 lg:px-8 lg:scroll-pl-8 [&::-webkit-scrollbar]:hidden"
+        onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
+        onPointerUp={handlePointerEnd}
+        onPointerCancel={handlePointerCancel}
+        className="review-carousel-track flex touch-pan-x snap-x gap-4 overflow-x-auto overscroll-x-contain px-4 py-2 scroll-pl-4 cursor-grab select-none [scrollbar-width:none] active:cursor-grabbing sm:px-6 sm:scroll-pl-6 lg:px-8 lg:scroll-pl-8 [&::-webkit-scrollbar]:hidden"
       >
         {loopedReviews.map(({ review, copy }, index) => (
           <div

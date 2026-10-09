@@ -6,7 +6,8 @@ export const POSTS_PER_PAGE = 9;
 export const formatBlogDate = (date) => {
   if (!date) return "";
 
-  const parsedDate = new Date(`${date}T00:00:00`);
+  const dateOnly = typeof date === "string" ? date.slice(0, 10) : date;
+  const parsedDate = new Date(`${dateOnly}T00:00:00`);
   if (Number.isNaN(parsedDate.getTime())) return "";
 
   const day = parsedDate.getDate();
@@ -42,6 +43,41 @@ export const RELATED_POSTS_LIMIT = 8;
 
 export const slugifyHeading = (text) => text.toLowerCase().trim().replace(/[^\w\s-]/g, "").replace(/\s+/g, "-");
 
+export const getPostHeadingsFromHtml = (content = "") => {
+  const headingPattern = /<h([1-6])\b([^>]*)>([\s\S]*?)<\/h\1>/gi;
+  const usedIds = {};
+  const headings = [];
+
+  for (const match of content.matchAll(headingPattern)) {
+    const [, level, attributes, innerHtml] = match;
+    const text = innerHtml.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
+    if (!text) continue;
+
+    const existingId = attributes.match(/\bid\s*=\s*["']([^"']+)["']/i)?.[1];
+    const baseId = existingId || slugifyHeading(text);
+    const count = usedIds[baseId] || 0;
+    usedIds[baseId] = count + 1;
+
+    headings.push({
+      id: count ? `${baseId}-${count + 1}` : baseId,
+      level: Number(level),
+      text,
+    });
+  }
+
+  return headings;
+};
+
+export const addHeadingIdsToHtml = (content = "") => content.replace(
+  /<h([1-6])\b([^>]*)>([\s\S]*?)<\/h\1>/gi,
+  (match, level, attributes, innerHtml) => {
+    if (/\bid\s*=\s*["'][^"']+["']/i.test(attributes)) return match;
+    const text = innerHtml.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
+    const id = slugifyHeading(text);
+    return `<h${level}${attributes.trim()} id="${id}">${innerHtml}</h${level}>`;
+  },
+);
+
 export const getPostBySlug = (slug) => blogPosts.find((post) => post.slug === slug);
 
 export const getAllPostSlugs = () => blogPosts.map((post) => post.slug);
@@ -63,7 +99,8 @@ export const getPostHeadings = (slug) => {
 
 export const formatBlogDateLong = (date) => {
   if (!date) return "";
-  const parsedDate = new Date(`${date}T00:00:00`);
+  const dateOnly = typeof date === "string" ? date.slice(0, 10) : date;
+  const parsedDate = new Date(`${dateOnly}T00:00:00`);
   if (Number.isNaN(parsedDate.getTime())) return "";
   const day = parsedDate.getDate();
   const suffix = day >= 11 && day <= 13 ? "th" : ({ 1: "st", 2: "nd", 3: "rd" }[day % 10] || "th");
