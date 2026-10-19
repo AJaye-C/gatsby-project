@@ -23,7 +23,7 @@ const PageHero = ({
   const [isHeroMuted, setIsHeroMuted] = React.useState(true);
 
   const videoSrc = mediaUrl(video);
-  const logoSrc = mediaUrl(headingImage) || "/figma/images/logo-long.png";
+  const logoSrc = mediaUrl(headingImage);
   const PrimaryTag = primaryButtonLink ? "a" : "button";
   const primaryProps = primaryButtonLink ? { href: primaryButtonLink } : { type: "button" };
 
@@ -36,11 +36,13 @@ const PageHero = ({
         <p className="text-[clamp(2.8rem,4vw,4.3rem)] font-medium leading-none tracking-[-0.06em] text-brand-slate">
           {heading}
         </p>
-        <img
-          src={logoSrc}
-          alt={mediaAlt(headingImage, "Pocket Creatives")}
-          className="mt-1 h-[44px] w-auto object-contain sm:h-[58px] lg:h-[72px] 2xl:h-[84px]"
-        />
+        {logoSrc && (
+          <img
+            src={logoSrc}
+            alt={mediaAlt(headingImage, "Pocket Creatives")}
+            className="mt-1 h-[44px] w-auto object-contain sm:h-[58px] lg:h-[72px] 2xl:h-[84px]"
+          />
+        )}
       </div>
 
       <div className="mt-8 grid items-start gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:gap-12">

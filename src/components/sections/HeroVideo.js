@@ -6,7 +6,7 @@ import { mediaUrl } from "../../utils/acf";
 // Page-builder layout: "hero_video"  (fields: heading, video)
 const HeroVideo = ({ heading, video }) => {
   const { isMuted, toggleMuted } = useMutedVideo();
-  const videoSrc = mediaUrl(video) || "/figma/videos/hero.mp4";
+  const videoSrc = mediaUrl(video);
 
   return (
     <div className="mx-auto max-w-layout-shell overflow-x-clip px-4 pb-6 pt-24 sm:px-6 sm:pb-8 lg:px-8 lg:pt-28">
@@ -39,19 +39,21 @@ const HeroVideo = ({ heading, video }) => {
 
         <div className="mt-8">
           <p className="text-micro-note font-medium italic text-brand-subtle-muted">*Click on Video to toggle sound</p>
-          <div className="mt-3 overflow-hidden rounded-[18px] border border-brand-line shadow-[0_12px_22px_rgba(0,0,0,0.08)]">
-            <video
-              src={videoSrc}
-              autoPlay
-              loop
-              muted={isMuted}
-              playsInline
-              onClick={toggleMuted}
-              aria-label="Pocket Creatives showreel"
-              role="button"
-              className="aspect-video w-full cursor-pointer object-cover sm:aspect-auto sm:h-[360px] md:h-[420px] lg:h-[510px] 2xl:h-[610px]"
-            />
-          </div>
+          {videoSrc && (
+            <div className="mt-3 overflow-hidden rounded-[18px] border border-brand-line shadow-[0_12px_22px_rgba(0,0,0,0.08)]">
+              <video
+                src={videoSrc}
+                autoPlay
+                loop
+                muted={isMuted}
+                playsInline
+                onClick={toggleMuted}
+                aria-label="Pocket Creatives showreel"
+                role="button"
+                className="aspect-video w-full cursor-pointer object-cover sm:aspect-auto sm:h-[360px] md:h-[420px] lg:h-[510px] 2xl:h-[610px]"
+              />
+            </div>
+          )}
         </div>
       </section>
     </div>

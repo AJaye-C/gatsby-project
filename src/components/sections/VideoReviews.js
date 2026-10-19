@@ -14,7 +14,7 @@ const splitReviewSummary = (text = "") => {
 const VideoReviews = ({ heading, ratingSummary, video, reviews }) => {
   const [btsMuted, setBtsMuted] = React.useState(true);
   const summaryLines = splitReviewSummary(ratingSummary || "");
-  const videoSrc = mediaUrl(video) || "/figma/videos/bts.mp4";
+  const videoSrc = mediaUrl(video);
   const reviewItems = React.useMemo(
     () => (reviews || []).map((review) => ({ text: review.quote, name: review.author })),
     [reviews]
@@ -44,19 +44,23 @@ const VideoReviews = ({ heading, ratingSummary, video, reviews }) => {
           </div>
 
           <div className="lg:col-span-7">
-            <div className="mb-2 max-w-copy-video text-left text-xs italic text-gray-500 sm:text-sm lg:ml-auto">*Click on Video to toggle sound</div>
-            <div className="w-full max-w-copy-video overflow-hidden rounded-[20px] bg-gray-200 shadow-md lg:ml-auto">
-              <video
-                src={videoSrc}
-                autoPlay
-                loop
-                muted={btsMuted}
-                playsInline
-                onClick={() => setBtsMuted((current) => !current)}
-                className="aspect-video w-full cursor-pointer object-cover sm:aspect-[16/10]"
-                aria-label="Behind the scenes video"
-              />
-            </div>
+            {videoSrc && (
+              <>
+                <div className="mb-2 max-w-copy-video text-left text-xs italic text-gray-500 sm:text-sm lg:ml-auto">*Click on Video to toggle sound</div>
+                <div className="w-full max-w-copy-video overflow-hidden rounded-[20px] bg-gray-200 shadow-md lg:ml-auto">
+                  <video
+                    src={videoSrc}
+                    autoPlay
+                    loop
+                    muted={btsMuted}
+                    playsInline
+                    onClick={() => setBtsMuted((current) => !current)}
+                    className="aspect-video w-full cursor-pointer object-cover sm:aspect-[16/10]"
+                    aria-label="Behind the scenes video"
+                  />
+                </div>
+              </>
+            )}
           </div>
         </div>
 
