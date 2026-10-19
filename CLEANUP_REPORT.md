@@ -1,7 +1,7 @@
 # Cleanup report
 
 **Scan branch:** `chore/cleanup-unused`  
-**Phase:** Phase 1 was read-only; Phase 2 actions are recorded at the end of this baseline report.  
+**Phase:** Phase 1 was read-only; Phase 2 actions are recorded at the end of this baseline report.
 **Scope:** Gatsby source, route creation, package/config references, custom styles, and static asset references. Searches excluded generated `public/`, `.cache/`, and `node_modules/` content.
 
 ## Safe to delete (High)
