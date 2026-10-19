@@ -9,7 +9,7 @@ const IntroBanner = ({ heading, text, buttonLabel, buttonLink, image, badge }) =
 
   const ButtonTag = buttonLink ? "a" : "button";
   const buttonProps = buttonLink ? { href: buttonLink } : { type: "button" };
-  const badgeSrc = mediaUrl(badge) || "/figma/icons/us-about.svg";
+  const badgeSrc = mediaUrl(badge) || "/figma/icons/cta/us-about.svg";
 
   return (
     <section className="w-full bg-brand-teal py-16 text-white lg:py-20">
@@ -41,7 +41,7 @@ const IntroBanner = ({ heading, text, buttonLabel, buttonLink, image, badge }) =
                 }}
               >
                 <span className="flex h-[70px] w-[70px] shrink-0 items-center justify-center rounded-full bg-brand-yellow text-brand-text-dark">
-                  <img src="/figma/icons/msg-us.svg" alt="" aria-hidden="true" className="h-[22px] w-[22px] object-contain" />
+                  <img src="/figma/icons/contact/msg-us.svg" alt="" aria-hidden="true" className="h-[22px] w-[22px] object-contain" />
                 </span>
 
                 <span

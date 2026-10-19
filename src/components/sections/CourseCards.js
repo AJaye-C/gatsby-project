@@ -112,7 +112,7 @@ const CourseCards = ({ heading = "", courseItems = [], linkLabel = "", linkHref 
                         {course.title}
                       </span>
                       <img
-                        src="/figma/icons/icon-arrow-2.svg"
+                        src="/figma/icons/arrows/icon-arrow-2.svg"
                         alt=""
                         aria-hidden="true"
                         className="absolute bottom-[104px] right-[79px] h-auto w-[34px]"
@@ -138,7 +138,7 @@ const CourseCards = ({ heading = "", courseItems = [], linkLabel = "", linkHref 
                         onClick={() => closeCourse(index)}
                         className="absolute bottom-[67px] right-[110px] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-teal"
                       >
-                        <img src="/figma/icons/pricing-arrow-right.svg" alt="" aria-hidden="true" className="h-auto w-[34px] -scale-x-100" />
+                        <img src="/figma/icons/arrows/pricing-arrow-right.svg" alt="" aria-hidden="true" className="h-auto w-[34px] -scale-x-100" />
                       </button>
                     </div>
                   </div>

@@ -17,7 +17,7 @@ const IntroCards = ({ heading, text, buttonLabel, buttonLink, introCardItems = [
   const buttonContent = (
     <>
       <img
-        src="/figma/icons/contact-email.svg"
+        src="/figma/icons/contact/contact-email.svg"
         alt=""
         aria-hidden="true"
         className="h-6 w-6 transition duration-200 group-hover:brightness-0 group-hover:invert"
@@ -56,7 +56,7 @@ const IntroCards = ({ heading, text, buttonLabel, buttonLink, introCardItems = [
           {cards.map((card, index) => {
             const lead = index === 0;
             // Default to the respective hard-coded icon and dimensions from HowWeWorkIntro if blank[cite: 2]
-            const defaultIcon = lead ? "/figma/icons/stairs.svg" : "/figma/icons/flag.svg";
+            const defaultIcon = lead ? "/figma/icons/decor/stairs.svg" : "/figma/icons/decor/flag.svg";
             const icon = mediaUrl(card.icon) || defaultIcon;
             const iconClassName = lead ? "h-[77px] w-[87px] shrink-0" : "h-[79px] w-[69px] shrink-0";
             

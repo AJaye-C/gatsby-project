@@ -32,7 +32,7 @@ const VideoReviews = ({ heading, ratingSummary, video, reviews }) => {
             />
 
             <div className="mt-6 flex items-center gap-3">
-              <img src="/figma/icons/icon-google.svg" alt="Google" className="h-8 w-8 sm:h-10 sm:w-10 object-contain" />
+              <img src="/figma/icons/social/icon-google.svg" alt="Google" className="h-8 w-8 sm:h-10 sm:w-10 object-contain" />
               <div className="max-w-[145px] text-lg font-bold leading-tight text-brand-slate sm:max-w-[180px] sm:text-xl">
                 {summaryLines.map((line) => (
                   <span key={line} className="block">

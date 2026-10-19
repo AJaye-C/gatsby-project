@@ -161,7 +161,7 @@ const VideoPortfolio = ({ heading = "", portfolioCategories = [] }) => {
           <div className="relative flex items-center justify-center border-t-[3px] border-white px-14 py-4 sm:px-0">
             <div className="flex items-center gap-6 sm:gap-10">
               <button type="button" aria-label="Previous video" onClick={() => step(-1)} disabled={!item} className={ring}>
-                {icon("/figma/icons/skip.svg")}
+                {icon("/figma/icons/media/skip.svg")}
               </button>
               <button
                 type="button"
@@ -170,10 +170,10 @@ const VideoPortfolio = ({ heading = "", portfolioCategories = [] }) => {
                 onClick={togglePlaying}
                 className={ring}
               >
-                {icon("/figma/icons/portfolio-play-pause.svg", "h-12 w-12")}
+                {icon("/figma/icons/media/portfolio-play-pause.svg", "h-12 w-12")}
               </button>
               <button type="button" aria-label="Next video" onClick={() => step(1)} disabled={!item} className={ring}>
-                {icon("/figma/icons/skip.svg", "h-6 w-6 rotate-180")}
+                {icon("/figma/icons/media/skip.svg", "h-6 w-6 rotate-180")}
               </button>
             </div>
 
@@ -184,7 +184,7 @@ const VideoPortfolio = ({ heading = "", portfolioCategories = [] }) => {
               onClick={toggleMuted}
               className={`absolute right-4 sm:right-10 ${ring}`}
             >
-              {icon("/figma/icons/vol.svg")}
+              {icon("/figma/icons/media/vol.svg")}
             </button>
           </div>
 

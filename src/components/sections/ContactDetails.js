@@ -8,11 +8,11 @@ import { splitParagraphs } from "../../utils/acf";
 // Icons are the static SVGs below (full literals so the build keeps them). Internal paths use Gatsby Link
 // (gotcha 33); tel:/mailto:/URLs use a plain <a>.
 const icons = {
-  phone: { src: "/figma/icons/contact-phone.svg", alt: "Phone" },
-  location: { src: "/figma/icons/contact-location.svg", alt: "Location" },
+  phone: { src: "/figma/icons/contact/contact-phone.svg", alt: "Phone" },
+  location: { src: "/figma/icons/contact/contact-location.svg", alt: "Location" },
   // contact-email.svg is a bare envelope without the yellow circle, so it is framed here.
   // If you export the Figma email icon WITH the circle, replace the file and delete `framed: true`.
-  email: { src: "/figma/icons/contact-email.svg", alt: "Email", framed: true },
+  email: { src: "/figma/icons/contact/contact-email.svg", alt: "Email", framed: true },
 };
 
 const iconSize = "h-[clamp(72px,7.22vw,104px)] w-[clamp(72px,7.22vw,104px)] shrink-0";

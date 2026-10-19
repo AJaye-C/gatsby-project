@@ -37,7 +37,7 @@ const ArrowBanner = ({ variant = "", heading = "", text = "" }) => {
           </div>
 
           <img
-            src="/figma/icons/icon-down.svg"
+            src="/figma/icons/arrows/icon-down.svg"
             alt=""
             aria-hidden="true"
             className="section-two-arrow pointer-events-none mx-auto mt-10 h-auto w-[clamp(110px,22vw,214px)] max-w-none object-contain md:mt-[clamp(150px,11vw,260px)] md:justify-self-end min-[1920px]:absolute min-[1920px]:bottom-auto min-[1920px]:left-auto min-[1920px]:right-[310px] min-[1920px]:top-[288px] min-[1920px]:mt-0"
@@ -58,7 +58,7 @@ const ArrowBanner = ({ variant = "", heading = "", text = "" }) => {
             <p className="max-w-copy-video whitespace-pre-line text-body-copy text-[#1f2937]">{text}</p>
             <div className="mt-1 flex shrink-0 items-start justify-center self-center sm:self-start">
               <img
-                src="/figma/icons/icon-down.svg"
+                src="/figma/icons/arrows/icon-down.svg"
                 alt="Scroll down"
                 className="section-two-arrow h-20 w-20 max-w-none object-contain sm:h-28 sm:w-28 md:h-36 md:w-36"
               />

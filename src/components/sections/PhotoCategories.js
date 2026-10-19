@@ -13,7 +13,7 @@ const LetsTalkButton = ({ className = "" }) => {
       onMouseLeave={() => setIsHovered(false)}
     >
       <img
-        src={isHovered ? "/figma/icons/lets-talk-hvr.svg" : "/figma/icons/lets-talk.svg"}
+        src={isHovered ? "/figma/icons/cta/lets-talk-hvr.svg" : "/figma/icons/cta/lets-talk.svg"}
         alt="Let's talk"
         className="h-[96px] w-[96px] object-contain drop-shadow-[0_8px_20px_rgba(23,156,189,0.28)] sm:h-[104px] sm:w-[104px] md:h-[110px] md:w-[110px] lg:h-[116px] lg:w-[116px]"
       />
@@ -51,7 +51,7 @@ const PhotoCategories = ({ label, categories = [] }) => {
       <div className="mx-auto max-w-layout-shell px-6 sm:px-10 lg:px-12">
         <div className="flex items-center gap-3">
           <img
-            src="/figma/icons/icon-shutter.svg"
+            src="/figma/icons/decor/icon-shutter.svg"
             alt="Photography shutter icon"
             className="h-8 w-8 object-contain md:h-10 md:w-10"
           />

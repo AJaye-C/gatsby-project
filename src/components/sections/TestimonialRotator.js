@@ -10,8 +10,8 @@ const ROTATION_MS = 8000;
 
 const QuoteMarks = ({ className = "" }) => (
   <div aria-hidden="true" className={`pointer-events-none flex gap-[clamp(4px,0.45vw,9px)] opacity-10 ${className}`}>
-    <img src="/figma/icons/quote.svg" alt="" className="h-auto w-[clamp(52px,5.5vw,105px)]" />
-    <img src="/figma/icons/quote.svg" alt="" className="h-auto w-[clamp(52px,5.5vw,105px)]" />
+    <img src="/figma/icons/decor/quote.svg" alt="" className="h-auto w-[clamp(52px,5.5vw,105px)]" />
+    <img src="/figma/icons/decor/quote.svg" alt="" className="h-auto w-[clamp(52px,5.5vw,105px)]" />
   </div>
 );
 

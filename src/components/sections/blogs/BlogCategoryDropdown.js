@@ -60,7 +60,7 @@ const BlogCategoryDropdown = ({ categories, selected, onSelect }) => {
       >
         <span>{selectedCategory?.filterLabel || selectedCategory?.label || selected}</span>
         <img
-          src="/figma/icons/icon-arrow-down.svg"
+          src="/figma/icons/arrows/icon-arrow-down.svg"
           alt=""
           aria-hidden="true"
           className={`absolute right-3 h-3 w-3 transition-transform duration-200 ease-out motion-reduce:transition-none ${open ? "rotate-180" : ""}`}

@@ -82,7 +82,7 @@ const Header = () => {
               onClick={() => setIsMenuOpen(false)}
               className="group inline-flex h-11 w-11 items-center justify-center rounded-full border border-brand-line bg-white text-[#0f172a] transition-all duration-200 hover:bg-social-whatsapp hover:text-white"
             >
-              <img src="/figma/icons/icon-whatsapp.svg" alt="WhatsApp" className="h-5 w-5 transition duration-200 group-hover:brightness-0 group-hover:invert" />
+              <img src="/figma/icons/social/icon-whatsapp.svg" alt="WhatsApp" className="h-5 w-5 transition duration-200 group-hover:brightness-0 group-hover:invert" />
             </a>
 
             <button

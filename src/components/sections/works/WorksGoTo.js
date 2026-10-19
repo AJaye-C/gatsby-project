@@ -3,7 +3,7 @@ import { Link } from "gatsby";
 
 const WorksGoToLink = ({ href, children, linkColorClass = "text-white" }) => {
   const className = "works-intro-link group flex w-full max-w-[410px] items-center gap-3";
-  const content = <><img src="/figma/icons/icon-arrow-2.svg" alt="" aria-hidden="true" className="works-intro-arrow-icon" /><span className={`works-intro-link-label font-extrabold leading-[1.25] tracking-[-0.05em] ${linkColorClass} group-hover:underline`}>{children}</span></>;
+  const content = <><img src="/figma/icons/arrows/icon-arrow-2.svg" alt="" aria-hidden="true" className="works-intro-arrow-icon" /><span className={`works-intro-link-label font-extrabold leading-[1.25] tracking-[-0.05em] ${linkColorClass} group-hover:underline`}>{children}</span></>;
 
   return href.startsWith("/") ? <Link to={href} className={className}>{content}</Link> : <a href={href} className={className}>{content}</a>;
 };

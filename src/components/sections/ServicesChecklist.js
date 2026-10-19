@@ -26,7 +26,7 @@ const ServicesChecklist = ({ lines, columns }) => {
   const [isSayHelloHovered, setIsSayHelloHovered] = React.useState(false);
   const lineItems = lines || [];
   const columnItems = columns || [];
-  const sayHelloSrc = isSayHelloHovered ? "/figma/icons/say-hello-hvr.svg" : "/figma/icons/say-hello.svg";
+  const sayHelloSrc = isSayHelloHovered ? "/figma/icons/cta/say-hello-hvr.svg" : "/figma/icons/cta/say-hello.svg";
 
   return (
     <section className="relative w-full bg-brand-yellow py-16 text-brand-text-dark sm:py-20 lg:py-24" aria-labelledby="section-six-title">

@@ -73,7 +73,7 @@ const ToggleButton = ({ colorClassName, onClick, controls, label, lines, flip })
       ))}
     </span>
     <img
-      src="/figma/icons/pricing-arrow-left.svg"
+      src="/figma/icons/arrows/pricing-arrow-left.svg"
       alt=""
       aria-hidden="true"
       className={`mt-3 h-4 w-4 object-contain transition-[filter] duration-200 group-hover:brightness-0 group-hover:invert ${

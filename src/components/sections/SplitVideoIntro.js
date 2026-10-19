@@ -78,7 +78,7 @@ const SplitVideoIntro = ({
         /* Variant 1: Yellow background (Pricing style) */
         <div className="relative mx-auto grid max-w-[1440px] grid-cols-1 gap-y-4 px-6 pb-16 pt-28 sm:px-10 md:pt-32 lg:min-h-[985px] lg:gap-x-10 lg:gap-y-0 lg:px-10 lg:pb-0 lg:pt-[188px] min-[1440px]:gap-x-12 min-[1440px]:px-[4.75rem] lg:grid-cols-[minmax(0,1fr)_456px] lg:grid-rows-[auto_1fr]">
           <img
-            src="/figma/icons/pound.svg"
+            src="/figma/icons/decor/pound.svg"
             alt=""
             aria-hidden="true"
             className="pointer-events-none absolute z-[-1] hidden h-[720px] w-[720px] max-w-none -translate-x-1/2 lg:left-[calc(50%_-_250px)] lg:top-[174px] lg:block"
@@ -123,7 +123,7 @@ const SplitVideoIntro = ({
           {(paragraphs.length > 0 || text) && (
             <div className="relative mt-2 max-w-[786px] space-y-5 text-base font-medium leading-snug tracking-[-0.5px] sm:text-lg lg:z-10 lg:col-start-1 lg:row-start-2 lg:mt-[42px] lg:text-[20px] lg:leading-none lg:tracking-[-1px]">
               <img
-                src="/figma/icons/pound.svg"
+                src="/figma/icons/decor/pound.svg"
                 alt=""
                 aria-hidden="true"
                 className="pointer-events-none absolute left-1/2 top-1/2 z-[-1] h-[min(850px,95vw)] w-[min(850px,95vw)] max-w-none -translate-x-1/2 -translate-y-1/2 lg:hidden"

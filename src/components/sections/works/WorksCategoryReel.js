@@ -112,7 +112,7 @@ const WorksCategoryReel = ({ heading = "", categories = [], items = [], selected
           className="transition-transform active:scale-95 focus:outline-none"
         >
           <img
-            src={isPaused ? "/figma/icons/icon-pause.svg" : "/figma/icons/icon-play-works.svg"}
+            src={isPaused ? "/figma/icons/media/icon-pause.svg" : "/figma/icons/media/icon-play-works.svg"}
             alt={isPaused ? "Play" : "Pause"}
             className="h-8 w-8"
           />

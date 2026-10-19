@@ -11,7 +11,7 @@ const badgePositions = [
   "-bottom-8 -right-3 h-[76px] w-[76px] sm:-bottom-12 sm:-right-8 sm:h-[104px] sm:w-[104px] lg:-bottom-16 lg:-right-16 lg:h-[137px] lg:w-[137px]",
 ];
 
-const fallbackBadges = ["/figma/icons/pound-2.svg", "/figma/icons/pound-3.svg"];
+const fallbackBadges = ["/figma/icons/decor/pound-2.svg", "/figma/icons/decor/pound-3.svg"];
 
 const BadgeCards = ({ cardItems = [] }) => {
   const cards = (cardItems || []).filter((card) => card && (card.title || card.text));

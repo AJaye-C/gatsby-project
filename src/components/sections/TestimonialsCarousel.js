@@ -61,7 +61,7 @@ const ClampedQuote = ({ html }) => {
 const QuoteMark = ({ className }) => (
   <div className={`pointer-events-none absolute flex items-start justify-center gap-1 opacity-10 ${className}`}>
     {[0, 1].map((i) => (
-      <img key={i} src="/figma/icons/quote.svg" alt="" aria-hidden="true" className="h-14 w-7 sm:h-20 sm:w-10" />
+      <img key={i} src="/figma/icons/decor/quote.svg" alt="" aria-hidden="true" className="h-14 w-7 sm:h-20 sm:w-10" />
     ))}
   </div>
 );

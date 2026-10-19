@@ -39,7 +39,7 @@ const AccordionStage = ({ stageNumber, accordionItems = [] }) => {
                 >
                   <span>{item.title}</span>
                   <img
-                    src={isOpen ? "/figma/icons/icon-arrow-up.svg" : "/figma/icons/icon-down.svg"}
+                    src={isOpen ? "/figma/icons/arrows/icon-arrow-up.svg" : "/figma/icons/arrows/icon-down.svg"}
                     alt=""
                     aria-hidden="true"
                     className="h-auto w-[30px] shrink-0"

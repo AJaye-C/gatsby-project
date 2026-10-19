@@ -94,7 +94,7 @@ const VideoSlider = ({ heading = "", text = "", videoItems = [] }) => {
             onClick={() => goTo(activeIndex - 1)}
             className={`order-2 col-start-1 row-start-2 flex h-12 w-12 shrink-0 items-center justify-center justify-self-end focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brand-teal focus-visible:ring-offset-2 focus-visible:ring-offset-brand-accent-yellow md:order-1 md:col-auto md:row-auto md:justify-self-auto lg:h-[117px] lg:w-[60px] ${activeIndex === 0 ? "invisible" : ""}`}
           >
-            <img src="/figma/icons/icon-arrow-down.svg" alt="" aria-hidden="true" className="h-auto w-8 rotate-90 lg:w-[34px]" />
+            <img src="/figma/icons/arrows/icon-arrow-down.svg" alt="" aria-hidden="true" className="h-auto w-8 rotate-90 lg:w-[34px]" />
           </button>
 
           <div ref={viewportRef} className="order-1 col-span-2 row-start-1 w-full max-w-[1060px] overflow-hidden md:order-2 md:col-auto md:row-auto" aria-live="off">
@@ -147,7 +147,7 @@ const VideoSlider = ({ heading = "", text = "", videoItems = [] }) => {
             onClick={() => goTo(activeIndex + 1)}
             className={`order-3 col-start-2 row-start-2 flex h-12 w-12 shrink-0 items-center justify-center justify-self-start focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brand-teal focus-visible:ring-offset-2 focus-visible:ring-offset-brand-accent-yellow md:order-3 md:col-auto md:row-auto md:justify-self-auto lg:h-[117px] lg:w-[60px] ${HIDE_NEXT_ON_LAST && isLast ? "invisible" : ""}`}
           >
-            <img src="/figma/icons/icon-arrow-down.svg" alt="" aria-hidden="true" className="h-auto w-8 -rotate-90 lg:w-[34px]" />
+            <img src="/figma/icons/arrows/icon-arrow-down.svg" alt="" aria-hidden="true" className="h-auto w-8 -rotate-90 lg:w-[34px]" />
           </button>
         </div>
 

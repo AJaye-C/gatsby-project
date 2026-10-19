@@ -74,7 +74,7 @@ const MediaHero = ({
   const ctaContent = (
     <>
       <img
-        src="/figma/icons/contact-email.svg"
+        src="/figma/icons/contact/contact-email.svg"
         alt=""
         aria-hidden="true"
         className="h-6 w-6 transition duration-200 group-hover:brightness-0 group-hover:invert"

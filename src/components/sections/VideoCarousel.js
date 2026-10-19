@@ -14,7 +14,7 @@ const LetsTalkButton = ({ className = "" }) => {
       onMouseLeave={() => setIsHovered(false)}
     >
       <img
-        src={isHovered ? "/figma/icons/lets-talk-hvr.svg" : "/figma/icons/lets-talk.svg"}
+        src={isHovered ? "/figma/icons/cta/lets-talk-hvr.svg" : "/figma/icons/cta/lets-talk.svg"}
         alt="Let's talk"
         className="h-[84px] w-[84px] object-contain drop-shadow-[0_8px_20px_rgba(23,156,189,0.28)] sm:h-[110px] sm:w-[110px] md:h-[116px] md:w-[116px]"
       />
@@ -69,7 +69,7 @@ const VideoCarousel = ({ label, videos = [] }) => {
       <div className="mx-auto max-w-layout-shell px-4 sm:px-6 lg:px-8">
         <div className="mb-6 flex items-end justify-between gap-4 sm:mb-10">
           <div className="flex items-center gap-3">
-            <img src="/figma/icons/icon-play.svg" alt="Play icon" className="h-8 w-8 md:h-10 md:w-10" />
+            <img src="/figma/icons/media/icon-play.svg" alt="Play icon" className="h-8 w-8 md:h-10 md:w-10" />
             <span className="text-[1.35rem] font-medium sm:text-[1.7rem] tracking-[-0.06em] text-brand-slate md:text-[2.2rem]">
               {label}
             </span>

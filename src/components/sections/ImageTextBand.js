@@ -8,8 +8,8 @@ import { mediaAlt, mediaUrl } from "../../utils/acf";
 // Rows alternate: 1st = image left, 2nd = image right, 3rd = image left ... (the two looks are tuned to the design).
 // Links are Text fields (gotcha 33): internal paths use Gatsby Link; mailto:/URLs use a plain <a>.
 // A row with a badge_link but no badge image falls back to the static "See our works" badge pair.
-const FALLBACK_BADGE = "/figma/icons/our-works.svg";
-const FALLBACK_BADGE_HOVER = "/figma/icons/our-works-hvr.svg";
+const FALLBACK_BADGE = "/figma/icons/cta/our-works.svg";
+const FALLBACK_BADGE_HOVER = "/figma/icons/cta/our-works-hvr.svg";
 
 const isInternal = (href = "") => href.startsWith("/") && !href.startsWith("//");
 

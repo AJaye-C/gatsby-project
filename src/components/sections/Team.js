@@ -33,13 +33,13 @@ const LinkedInButton = ({ url, name, className = "" }) => {
   const icons = (
     <>
       <img
-        src="/figma/icons/icon-linkedin.svg"
+        src="/figma/icons/social/icon-linkedin.svg"
         alt=""
         aria-hidden="true"
         className="absolute inset-0 h-full w-full object-contain opacity-100 transition-opacity duration-200 group-hover:opacity-0"
       />
       <img
-        src="/figma/icons/icon-linkedin-hvr.svg"
+        src="/figma/icons/social/icon-linkedin-hvr.svg"
         alt=""
         aria-hidden="true"
         className="absolute inset-0 h-full w-full object-contain opacity-0 transition-opacity duration-200 group-hover:opacity-100"
