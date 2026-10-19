@@ -1,11 +1,12 @@
 import * as React from "react";
-import { firstSlide, secondSlide } from "../../data/clients";
 
 // Logo grid + marquee. Used by the client_logos and client_logos_highlight layouts.
-// `slides` = array of arrays of { name, src, alt }. Falls back to the static data file.
+// `slides` = array of arrays of { name, src, alt }.
 // A single slide is repeated once so the marquee can loop.
-const LogoMarquee = ({ slides, className = "" }) => {
-  const slideList = slides && slides.length ? slides : [firstSlide, secondSlide];
+const LogoMarquee = ({ slides = [], className = "" }) => {
+  if (!slides.length) return null;
+
+  const slideList = slides;
   const isRepeated = slideList.length === 1;
   const renderedSlides = isRepeated ? [slideList[0], slideList[0]] : slideList;
 

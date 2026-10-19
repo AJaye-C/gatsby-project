@@ -1,5 +1,4 @@
 import * as React from "react";
-import { sectionEightReviews } from "../../data/reviews";
 
 const AUTOPLAY_MS = 2500;
 const SCROLL_MS = 800; // glide duration per review
@@ -7,9 +6,9 @@ const COPIES = 3; // middle copy is the "home" position; we silently jump betwee
 
 const easeInOutCubic = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
 
-// `reviews` = [{ text, name }]. Falls back to src/data/reviews.js if none are passed.
-const ReviewsCarousel = ({ reviews }) => {
-  const reviewList = reviews && reviews.length ? reviews : sectionEightReviews;
+// `reviews` = [{ text, name }].
+const ReviewsCarousel = ({ reviews = [] }) => {
+  const reviewList = reviews;
   const count = reviewList.length;
   const loopedReviews = React.useMemo(
     () => Array.from({ length: COPIES }, (_, copy) => reviewList.map((review) => ({ review, copy }))).flat(),
@@ -118,7 +117,7 @@ const ReviewsCarousel = ({ reviews }) => {
   // Start on the middle copy (so "previous" works immediately) and re-align on resize
   React.useEffect(() => {
     const track = carouselRef.current;
-    if (!track) return undefined;
+    if (!track || !count) return undefined;
 
     const align = () => {
       const step = getStep();
@@ -135,7 +134,7 @@ const ReviewsCarousel = ({ reviews }) => {
 
   // Auto-advance one review every 2.5s on every screen size
   React.useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return undefined;
+    if (!count || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return undefined;
 
     const id = window.setInterval(() => {
       if (isPausedRef.current || document.hidden) return;
@@ -195,6 +194,8 @@ const ReviewsCarousel = ({ reviews }) => {
     dragPointerId.current = null;
     window.setTimeout(resume, AUTOPLAY_MS);
   };
+
+  if (!reviewList.length) return null;
 
   return (
     <div

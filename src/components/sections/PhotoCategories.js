@@ -1,5 +1,4 @@
 import * as React from "react";
-import { photographyCategories, photographyGallery } from "../../data/photography";
 import { mediaAlt, mediaUrl, slugify } from "../../utils/acf";
 
 const LetsTalkButton = ({ className = "" }) => {
@@ -24,8 +23,8 @@ const LetsTalkButton = ({ className = "" }) => {
 
 // Page-builder layout: "photo_categories"
 // fields: label, categories (repeater: title, image)
-const PhotoCategories = ({ label, categories }) => {
-  // WordPress rows -> { key, label, src, alt }. Falls back to src/data/photography.js if none.
+const PhotoCategories = ({ label, categories = [] }) => {
+  // WordPress rows -> { key, label, src, alt }.
   const items = React.useMemo(() => {
     const fromWp = (categories || [])
       .map((item, index) => ({
@@ -36,18 +35,13 @@ const PhotoCategories = ({ label, categories }) => {
       }))
       .filter((item) => item.label && item.src);
 
-    return fromWp.length
-      ? fromWp
-      : photographyCategories.map((category) => ({
-          key: category.key,
-          label: category.label,
-          src: photographyGallery[category.key],
-          alt: `${category.label} photography showcase`,
-        }));
+    return fromWp;
   }, [categories]);
 
   const [activeCategory, setActiveCategory] = React.useState(items[0]?.key);
   const activeItem = items.find((item) => item.key === activeCategory) || items[0];
+
+  if (!items.length) return null;
 
   return (
     <section className="relative w-full overflow-x-clip bg-brand-bg py-16 sm:py-20 lg:py-24">

@@ -1,5 +1,4 @@
 import * as React from "react";
-import { teamMembers as fallbackMembers } from "../../data/team";
 import { chunk, mediaAlt, mediaUrl } from "../../utils/acf";
 
 const splitRoles = (roles) =>
@@ -10,7 +9,7 @@ const splitRoles = (roles) =>
         .map((role) => role.trim())
         .filter(Boolean);
 
-// WordPress members -> the shape this component uses. Falls back to src/data/team.js if none.
+// WordPress members -> the shape this component uses.
 const normaliseMembers = (members) => {
   const fromWp = (members || [])
     .map((member, index) => ({
@@ -25,13 +24,7 @@ const normaliseMembers = (members) => {
     }))
     .filter((member) => member.firstName);
 
-  if (fromWp.length) return fromWp;
-
-  return fallbackMembers.map((member) => ({
-    ...member,
-    imageAlt: `${member.firstName} ${member.lastName}`,
-    linkedinUrl: member.linkedinUrl || "",
-  }));
+  return fromWp;
 };
 
 // A link when the member has a LinkedIn URL, otherwise the original (inert) button.
@@ -68,13 +61,13 @@ const LinkedInButton = ({ url, name, className = "" }) => {
 
 // Page-builder layout: "team"
 // fields: heading (Text), members (repeater: first_name, last_name, roles, bio, photo, linkedin_url)
-const Team = ({ heading, members }) => {
+const Team = ({ heading, members = [] }) => {
   const team = React.useMemo(() => normaliseMembers(members), [members]);
   const [activeId, setActiveId] = React.useState(team[0]?.id);
   const activeMember = team.find((member) => member.id === activeId) || team[0];
   const rows = React.useMemo(() => chunk(team, 3), [team]);
 
-  if (!activeMember) return null;
+  if (!team.length) return null;
 
   const fullName = `${activeMember.firstName} ${activeMember.lastName}`;
 

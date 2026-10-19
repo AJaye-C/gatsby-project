@@ -1,5 +1,4 @@
 import * as React from "react";
-import { videoCategories } from "../../data/videos";
 import { useVideoCarousel } from "../../hooks/useVideoCarousel";
 import { mediaUrl } from "../../utils/acf";
 
@@ -25,13 +24,13 @@ const LetsTalkButton = ({ className = "" }) => {
 
 // Page-builder layout: "video_carousel"
 // fields: label, videos (repeater: title, video)
-const VideoCarousel = ({ label, videos }) => {
-  // WordPress rows -> { title, src }. Falls back to src/data/videos.js if none.
+const VideoCarousel = ({ label, videos = [] }) => {
+  // WordPress rows -> { title, src }.
   const items = React.useMemo(() => {
     const fromWp = (videos || [])
       .map((item) => ({ title: item.title, src: mediaUrl(item.video) }))
       .filter((item) => item.src);
-    return fromWp.length ? fromWp : videoCategories;
+    return fromWp;
   }, [videos]);
 
   const trackRef = React.useRef(null);
@@ -44,7 +43,7 @@ const VideoCarousel = ({ label, videos }) => {
   // One slide = measured card width + gap, so each arrow/swipe moves exactly one video at every breakpoint
   React.useEffect(() => {
     const track = trackRef.current;
-    if (!track) return undefined;
+    if (!track || !items.length) return undefined;
 
     const measure = () => {
       const card = track.querySelector(".video-card");
@@ -62,6 +61,8 @@ const VideoCarousel = ({ label, videos }) => {
     window.addEventListener("resize", measure);
     return () => window.removeEventListener("resize", measure);
   }, [items.length]);
+
+  if (!items.length) return null;
 
   return (
     <section className="w-full overflow-x-clip bg-brand-bg py-12 sm:py-20 lg:py-24">
