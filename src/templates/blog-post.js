@@ -1,27 +1,29 @@
 import * as React from "react";
+import { graphql } from "gatsby";
 import Layout from "../components/Layout";
 import Header from "../components/home/Header";
 import Footer from "../components/home/Footer";
-import BlogPostHeader from "../components/blog/BlogPostHeader";
-import BlogPostContent from "../components/blog/BlogPostContent";
-import BlogLikeBar from "../components/blog/BlogLikeBar";
-import BlogRelatedPosts from "../components/blog/BlogRelatedPosts";
-import { getPostBody, getPostBySlug, getPostHeadings, getRelatedPosts } from "../utils/blog";
+import BlogPostHeader from "../components/sections/blogs/BlogPostHeader";
+import BlogPostContent from "../components/sections/blogs/BlogPostContent";
+import BlogLikeBar from "../components/sections/blogs/BlogLikeBar";
+import BlogRelatedPosts from "../components/sections/blogs/BlogRelatedPosts";
+import { decodeEntities, getRelatedPosts, normalizePost, processPostContent } from "../utils/blog";
 
-const BlogPostTemplate = ({ pageContext, location }) => {
-  const post = getPostBySlug(pageContext.slug);
-  if (!post) return null;
-  const body = getPostBody(post.slug);
-  const headings = getPostHeadings(post.slug);
+const BlogPostTemplate = ({ data, location }) => {
+  const node = data.wpPost;
+  if (!node) return null;
+  const post = normalizePost(node);
+  const { html, headings } = processPostContent(node.content || "");
+  const related = getRelatedPosts(data.allWpPost.nodes.map(normalizePost), post.slug);
   return (
     <Layout>
       <main className="min-h-screen bg-brand-bg text-brand-slate [--blog-sticky-top:120px]">
         <Header />
         <article>
           <BlogPostHeader post={post} location={location} />
-          <BlogPostContent body={body} headings={headings} />
+          <BlogPostContent html={html} headings={headings} />
           <BlogLikeBar />
-          <BlogRelatedPosts posts={getRelatedPosts(post.slug)} />
+          <BlogRelatedPosts posts={related} />
         </article>
         <Footer />
       </main>
@@ -31,7 +33,56 @@ const BlogPostTemplate = ({ pageContext, location }) => {
 
 export default BlogPostTemplate;
 
-export const Head = ({ pageContext }) => {
-  const post = getPostBySlug(pageContext.slug);
-  return <><title>{post?.title || "Blog | Pocket Creatives"}</title><meta name="description" content="TODO: Add blog post meta description." /></>;
-};
+export const Head = ({ data }) => (
+  <title>{data.wpPost ? decodeEntities(data.wpPost.title) : "Blog | Pocket Creatives"}</title>
+);
+
+export const query = graphql`
+  query BlogPostPage($id: String!) {
+    wpPost(id: { eq: $id }) {
+      id
+      slug
+      title
+      date
+      content
+      isSticky
+      author {
+        node {
+          name
+        }
+      }
+      categories {
+        nodes {
+          name
+          slug
+        }
+      }
+      featuredImage {
+        node {
+          mediaItemUrl
+          altText
+        }
+      }
+    }
+    allWpPost {
+      nodes {
+        id
+        slug
+        title
+        date
+        isSticky
+        categories {
+          nodes {
+            name
+            slug
+          }
+        }
+        featuredImage {
+          node {
+            mediaItemUrl
+          }
+        }
+      }
+    }
+  }
+`;

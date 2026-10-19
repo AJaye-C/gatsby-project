@@ -9,5 +9,11 @@ module.exports = {
   },
   plugins: [
     `gatsby-plugin-postcss`,
+    {
+      resolve: `gatsby-source-wordpress`,
+      options: {
+        url: `https://trial.seeksocial.site/graphql`,
+      },
+    },
   ],
 };

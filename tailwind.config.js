@@ -5,6 +5,7 @@ module.exports = {
     "./src/components/**/*.{js,jsx,ts,tsx}",
     "./src/hooks/**/*.{js,jsx,ts,tsx}",
     "./src/data/**/*.{js,jsx,ts,tsx}",
+    "./src/utils/**/*.{js,jsx}",
   ],
   theme: {
     screens: {
