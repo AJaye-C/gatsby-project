@@ -26,9 +26,6 @@ export { default as ProcessRows } from "./ProcessRows";
 export { default as ProcessSlider } from "./ProcessSlider";
 
 // Shared building blocks (not layouts)
-export { default as LogoMarquee } from "./LogoMarquee";
-export { default as StoryArrow } from "./StoryArrow";
-
 // New / Pricing-related layouts
 export { default as SplitVideoIntro } from "./SplitVideoIntro";
 export { default as ChecklistVideo } from "./ChecklistVideo";
@@ -50,9 +47,6 @@ export { default as StageImageRows } from "./StageImageRows";
 // Blog layouts (posts come from WordPress posts)
 export { default as BlogSlider } from "./blogs/BlogSlider";
 export { default as BlogListing } from "./blogs/BlogListing";
-
-// Shared building block (not a layout)
-export { default as BlogCategoryDropdown } from "./blogs/BlogCategoryDropdown";
 
 // Training layouts (reusable on any page)
 export { default as CourseCards } from "./CourseCards";

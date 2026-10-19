@@ -23,29 +23,3 @@
     box-sizing: border-box;
   }
 }
-
-@layer components {
-  .wrap {
-    @apply mx-auto w-full max-w-[1440px] px-5 sm:px-8 lg:px-10;
-  }
-
-  .heading-accent-yellow {
-    @apply font-black text-brand-yellow;
-  }
-
-  .heading-accent-cyan {
-    @apply font-black text-brand-cyan;
-  }
-
-  .section-kicker {
-    @apply text-brand-slate;
-  }
-}
-
-.hide-scroll {
-  scrollbar-width: none;
-}
-
-.hide-scroll::-webkit-scrollbar {
-  display: none;
-}
