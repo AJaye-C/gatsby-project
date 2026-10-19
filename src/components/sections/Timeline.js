@@ -28,7 +28,7 @@ const MAX_EVENTS = DOT_CLASSES.length;
 const DRAG_THRESHOLD = 5;
 
 
-export const StoryArrow = ({ direction, disabled, onClick, variant = "default" }) => (
+const StoryArrow = ({ direction, disabled, onClick, variant = "default" }) => (
   <button
     type="button"
     aria-label={direction === "previous" ? "Previous" : "Next"}

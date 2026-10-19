@@ -27,7 +27,6 @@ export { default as ProcessSlider } from "./ProcessSlider";
 
 // Shared building blocks (not layouts)
 export { default as LogoMarquee } from "./LogoMarquee";
-export { default as ReviewsCarousel } from "./ReviewsCarousel";
 export { default as StoryArrow } from "./StoryArrow";
 
 // New / Pricing-related layouts
