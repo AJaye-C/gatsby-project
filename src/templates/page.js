@@ -675,16 +675,7 @@ export const query = graphql`
           }
 
           ... on WpPageBuilderSectionsTestimonialsCarouselLayout {
-            carouselSlides {
-              quote
-              author
-              logo {
-                node {
-                  mediaItemUrl
-                  altText
-                }
-              }
-            }
+            testimonialCategory
           }
 
           ... on WpPageBuilderSectionsTestimonialsDetailsLayout {

@@ -1,9 +1,11 @@
 import * as React from "react";
-import { cleanWpHtml } from "../../utils/RichText";
+import { graphql, useStaticQuery } from "gatsby";
+import { cleanWpHtml, wpPlainText } from "../../utils/RichText";
 
-// Page-builder layout: "testimonials_carousel"
-// Fields: carouselSlides { quote, author, logo }
-// quote: WYSIWYG. Bold stays white-bold (not teal) because the active card is teal.
+// Page-builder layout: "testimonials_carousel"  (fields: testimonialCategory)
+// Slides come from the Testimonial CPT (WordPress > Testimonials), not from the section:
+//   post title = author, ACF quote = quote, featured image = logo, category = photography | videography.
+// testimonialCategory: category slug to show. Empty = all testimonials.
 const mod = (value, length) => ((value % length) + length) % length;
 
 const useIsomorphicLayoutEffect =
@@ -61,31 +63,68 @@ const ClampedQuote = ({ html }) => {
 const QuoteMark = ({ className }) => (
   <div className={`pointer-events-none absolute flex items-start justify-center gap-1 opacity-10 ${className}`}>
     {[0, 1].map((i) => (
-      <img key={i} src="/figma/icons/decor/quote.svg" alt="" aria-hidden="true" className="h-14 w-7 sm:h-20 sm:w-10" />
+      <img key={i} src="/figma/icons/quote.svg" alt="" aria-hidden="true" className="h-14 w-7 sm:h-20 sm:w-10" />
     ))}
   </div>
 );
 
-const TestimonialsCarousel = ({ carouselSlides = [] }) => {
+const TestimonialsCarousel = ({ testimonialCategory = "" }) => {
+  const data = useStaticQuery(graphql`
+    query TestimonialsCarouselPosts {
+      allWpTestimonial(sort: { date: DESC }) {
+        nodes {
+          id
+          title
+          menuOrder
+          testimonialDetails {
+            quote
+          }
+          featuredImage {
+            node {
+              mediaItemUrl
+              altText
+            }
+          }
+          testimonialCategories {
+            nodes {
+              slug
+            }
+          }
+        }
+      }
+    }
+  `);
+
+  const category = String(Array.isArray(testimonialCategory) ? testimonialCategory[0] : testimonialCategory || "")
+    .trim()
+    .toLowerCase();
+
   const slides = React.useMemo(
     () =>
-      carouselSlides
-        .filter((slide) => slide?.quote)
-        .map((slide, index) => ({
-          id: `${index}`,
-          quote: slide.quote,
-          author: slide.author || "",
-          logo: slide.logo?.node?.mediaItemUrl
-            ? { src: slide.logo.node.mediaItemUrl, alt: slide.logo.node.altText || "" }
+      (data?.allWpTestimonial?.nodes || [])
+        .filter((node) => node?.testimonialDetails?.quote)
+        .filter(
+          (node) =>
+            !category ||
+            (node.testimonialCategories?.nodes || []).some((term) => String(term?.slug).toLowerCase() === category)
+        )
+        // Lower "Order" first; equal order keeps newest-first from the query.
+        .sort((a, b) => (a.menuOrder || 0) - (b.menuOrder || 0))
+        .map((node) => ({
+          id: node.id,
+          quote: node.testimonialDetails.quote,
+          author: wpPlainText(node.title),
+          logo: node.featuredImage?.node?.mediaItemUrl
+            ? { src: node.featuredImage.node.mediaItemUrl, alt: node.featuredImage.node.altText || "" }
             : null,
         })),
-    [carouselSlides]
+    [data, category]
   );
 
   const [activeIndex, setActiveIndex] = React.useState(0);
   const [reducedMotion, setReducedMotion] = React.useState(false);
   const touchStartX = React.useRef(null);
-  const headingId = "testimonials-carousel-heading";
+  const headingId = `testimonials-carousel-heading-${category || "all"}`;
   const total = slides.length;
 
   React.useEffect(() => {
